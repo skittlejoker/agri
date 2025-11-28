@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Orders - Buyer Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <style>
+        .orders-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: white;
+            border-bottom: 1px solid #eee;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .back-button {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #333;
+            padding: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .back-button:hover {
+            background: #f5f5f5;
+            border-radius: 50%;
+        }
+
+        .search-bar {
+            flex: 1;
+            position: relative;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 0.75rem 2.5rem 0.75rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 0.95rem;
+        }
+
+        .search-bar i {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #999;
+        }
+
+        .menu-button {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #333;
+            padding: 0.5rem;
+        }
+
+        .order-tabs {
+            display: flex;
+            gap: 0.5rem;
+            padding: 1rem;
+            background: white;
+            border-bottom: 1px solid #eee;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .order-tabs::-webkit-scrollbar {
+            display: none;
+        }
+
+        .order-tab {
+            padding: 0.75rem 1.25rem;
+            background: none;
+            border: none;
+            font-size: 0.95rem;
+            color: #666;
+            cursor: pointer;
+            white-space: nowrap;
+            position: relative;
+            transition: color 0.2s;
+            font-weight: 400;
+        }
+
+        .order-tab:hover {
+            color: #333;
+        }
+
+        .order-tab.active {
+            color: #333;
+            font-weight: 600;
+        }
+
+        .order-tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: #333;
+        }
+
+        .orders-container {
+            padding: 1rem;
+            min-height: calc(100vh - 200px);
+        }
+
+        .empty-state {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 4rem 1rem;
+            text-align: center;
+        }
+
+        .empty-state-icon {
+            width: 120px;
+            height: 120px;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .empty-state-icon svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .empty-state h3 {
+            margin: 0 0 0.5rem 0;
+            color: #333;
+            font-size: 1.25rem;
+        }
+
+        .empty-state p {
+            margin: 0;
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        .order-card {
+            background: white;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .order-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .order-info h4 {
+            margin: 0 0 0.25rem 0;
+            color: #333;
+            font-size: 1rem;
+        }
+
+        .order-info p {
+            margin: 0;
+            color: #666;
+            font-size: 0.85rem;
+        }
+
+        .order-status-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .order-status-badge.pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .order-status-badge.to-ship {
+            background: #cfe2ff;
+            color: #084298;
+        }
+
+        .order-status-badge.shipped {
+            background: #d1ecf1;
+            color: #055160;
+        }
+
+        .order-status-badge.completed {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .order-status-badge.cancelled {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .order-details {
+            display: grid;
+            gap: 0.75rem;
+        }
+
+        .order-item {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .order-item-image {
+            width: 60px;
+            height: 60px;
+            border-radius: 4px;
+            object-fit: cover;
+            background: #f5f5f5;
+        }
+
+        .order-item-info {
+            flex: 1;
+        }
+
+        .order-item-info h5 {
+            margin: 0 0 0.25rem 0;
+            color: #333;
+            font-size: 0.9rem;
+        }
+
+        .order-item-info p {
+            margin: 0;
+            color: #666;
+            font-size: 0.85rem;
+        }
+
+        .order-total {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #eee;
+        }
+
+        .order-total strong {
+            font-size: 1.1rem;
+            color: #333;
+        }
+
+        .order-actions {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #eee;
+        }
+
+        .btn-sm {
+            padding: 0.5rem 1rem;
+            font-size: 0.85rem;
+            border-radius: 6px;
+        }
+    </style>
+</head>
+
+<body data-page="buyer-orders">
+    <header class="site-header">
+        <div class="brand">
+            <i class="fa-solid fa-wheat-awn"></i>
+            <span>AgriMarket</span>
+        </div>
+        <nav class="nav">
+            <a href="buyer_dashboard.html" class="nav-link">Dashboard</a>
+            <a href="#shop" class="nav-link">Shop</a>
+            <a href="#cart" class="nav-link">Cart</a>
+            <a href="buyer_orders.html" class="nav-link active">My Orders</a>
+            <a href="#" class="nav-link" id="changePasswordLink">Change Password</a>
+            <button id="helpBtn" class="btn btn-ghost" onclick="showHelpModal(); return false;"
+                title="Get Help (Press F1)">
+                <i class="fa-solid fa-circle-question"></i>
+                <span>Help</span>
+            </button>
+            <button id="logoutBtn" class="btn btn-ghost">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <span>Logout</span>
+            </button>
+        </nav>
+    </header>
+
+    <main class="container" style="padding: 0;">
+        <div class="orders-header">
+            <button class="back-button" onclick="window.location.href='buyer_dashboard.html'" aria-label="Back">
+                <i class="fa-solid fa-arrow-left"></i>
+            </button>
+            <div class="search-bar">
+                <input type="text" id="searchOrders" placeholder="Search your orders">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </div>
+            <button class="menu-button" aria-label="Menu">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+
+        <div class="order-tabs">
+            <button class="order-tab active" data-status="all">All</button>
+            <button class="order-tab" data-status="unpaid">Unpaid</button>
+            <button class="order-tab" data-status="to_ship">To ship</button>
+            <button class="order-tab" data-status="shipped">Shipped</button>
+            <button class="order-tab" data-status="to_review">To review</button>
+            <button class="order-tab" data-status="returns">Returns</button>
+        </div>
+
+        <div class="orders-container">
+            <div id="ordersList">
+                <div style="text-align: center; padding: 2rem;">
+                    <i class="fa-solid fa-spinner fa-spin" style="font-size: 2rem; color: #28a745;"></i>
+                    <p style="margin-top: 1rem; color: #666;">Loading orders...</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Review Modal -->
+    <div class="modal" id="reviewModal" aria-hidden="true">
+        <div class="modal-content" style="max-width: 500px;">
+            <div class="modal-header">
+                <h3>Review Product</h3>
+                <button class="icon-btn" id="closeReviewModal" aria-label="Close">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="reviewForm">
+                    <input type="hidden" id="reviewOrderId">
+                    <div class="form-group">
+                        <label>Rating</label>
+                        <div id="ratingStars" style="display: flex; gap: 0.5rem; margin-top: 0.5rem; font-size: 2rem;">
+                            <i class="fa-regular fa-star" data-rating="1" style="cursor: pointer; color: #ffc107;"></i>
+                            <i class="fa-regular fa-star" data-rating="2" style="cursor: pointer; color: #ffc107;"></i>
+                            <i class="fa-regular fa-star" data-rating="3" style="cursor: pointer; color: #ffc107;"></i>
+                            <i class="fa-regular fa-star" data-rating="4" style="cursor: pointer; color: #ffc107;"></i>
+                            <i class="fa-regular fa-star" data-rating="5" style="cursor: pointer; color: #ffc107;"></i>
+                        </div>
+                        <input type="hidden" id="reviewRating" value="0" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="reviewComment">Review Comment</label>
+                        <textarea id="reviewComment" rows="4" placeholder="Write your review (optional)"></textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" id="cancelReviewBtn">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Submit Review</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Change Password Modal -->
+    <div class="modal" id="changePasswordModal" aria-hidden="true">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Change Password</h3>
+                <button class="icon-btn" id="closePasswordModal" aria-label="Close">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="changePasswordForm">
+                    <div class="form-group password-field">
+                        <label for="oldPassword">Current Password</label>
+                        <input type="password" id="oldPassword" placeholder="Enter your current password" required>
+                        <button type="button" class="password-toggle-btn" data-target="oldPassword"
+                            aria-label="Toggle password visibility">
+                            <i class="fa-solid fa-eye"></i>
+                        </button>
+                        <small class="error" id="oldPasswordError"></small>
+                    </div>
+                    <div class="form-group password-field">
+                        <label for="newPassword">New Password</label>
+                        <input type="password" id="newPassword" placeholder="Enter new password" required>
+                        <button type="button" class="password-toggle-btn" data-target="newPassword"
+                            aria-label="Toggle password visibility">
+                            <i class="fa-solid fa-eye"></i>
+                        </button>
+                        <small class="error" id="newPasswordError"></small>
+                    </div>
+                    <div class="form-group password-field">
+                        <label for="confirmNewPassword">Confirm New Password</label>
+                        <input type="password" id="confirmNewPassword" placeholder="Re-enter new password" required>
+                        <button type="button" class="password-toggle-btn" data-target="confirmNewPassword"
+                            aria-label="Toggle password visibility">
+                            <i class="fa-solid fa-eye"></i>
+                        </button>
+                        <small class="error" id="confirmNewPasswordError"></small>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" id="cancelPasswordBtn">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Change Password</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="script-php.js"></script>
+    <script src="help-assistant.js"></script>
+    <script src="buyer-orders.js"></script>
+</body>
+
+</html>

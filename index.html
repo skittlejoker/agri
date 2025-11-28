@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgriMarket - Connecting Farmers & Buyers</title>
+    <meta name="description"
+        content="AgriMarket is the premier online marketplace connecting local farmers with buyers for sustainable agriculture. Shop fresh produce, support local farmers, and build a sustainable future.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+
+<body data-page="landing">
+    <!-- Navigation Header -->
+    <header class="site-header">
+        <div class="brand">
+            <i class="fa-solid fa-wheat-awn"></i>
+            <span>AgriMarket</span>
+        </div>
+        <nav class="nav">
+            <a href="#home" class="nav-link active">Home</a>
+            <a href="#features" class="nav-link">Features</a>
+            <a href="#about" class="nav-link">About</a>
+            <a href="#contact" class="nav-link">Contact</a>
+            <div class="auth-buttons">
+                <a href="login.html" class="btn btn-ghost">Login</a>
+                <a href="register.html" class="btn btn-primary">Register</a>
+            </div>
+        </nav>
+        <button class="mobile-menu-toggle" id="mobile-menu-toggle">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Connecting Farmers & Buyers for Sustainable Agriculture</h1>
+                <p class="hero-subtitle">Join AgriMarket - the premier online marketplace where local farmers meet
+                    conscious buyers. Support sustainable agriculture and enjoy fresh, locally-sourced produce.</p>
+                <div class="hero-actions">
+                    <a href="register.html" class="btn btn-primary btn-large">
+                        <i class="fa-solid fa-user-plus"></i>
+                        Get Started
+                    </a>
+                    <a href="#features" class="btn btn-secondary btn-large">
+                        <i class="fa-solid fa-info-circle"></i>
+                        Learn More
+                    </a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="stat-number">500+</span>
+                        <span class="stat-label">Active Farmers</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">2,500+</span>
+                        <span class="stat-label">Happy Customers</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">10,000+</span>
+                        <span class="stat-label">Products Sold</span>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="floating-cards">
+                    <div class="floating-card card-1">
+                        <i class="fa-solid fa-carrot"></i>
+                        <span>Fresh Vegetables</span>
+                    </div>
+                    <div class="floating-card card-2">
+                        <i class="fa-solid fa-apple-whole"></i>
+                        <span>Organic Fruits</span>
+                    </div>
+                    <div class="floating-card card-3">
+                        <i class="fa-solid fa-seedling"></i>
+                        <span>Local Produce</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Why Choose AgriMarket?</h2>
+                <p>Discover the benefits of our innovative agricultural marketplace</p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fa-solid fa-truck"></i>
+                    </div>
+                    <h3>Direct from Farm</h3>
+                    <p>Get fresh produce directly from local farmers, ensuring quality and supporting local agriculture.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fa-solid fa-leaf"></i>
+                    </div>
+                    <h3>Organic & Sustainable</h3>
+                    <p>Choose from a wide range of organic and sustainably grown products for a healthier lifestyle.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+                    <h3>Trusted Platform</h3>
+                    <p>Secure transactions and verified farmers ensure you get the best quality products every time.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fa-solid fa-mobile-alt"></i>
+                    </div>
+                    <h3>Easy to Use</h3>
+                    <p>Simple, intuitive interface that makes buying and selling agricultural products effortless.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fa-solid fa-chart-line"></i>
+                    </div>
+                    <h3>Fair Pricing</h3>
+                    <p>Transparent pricing that benefits both farmers and buyers, creating a sustainable ecosystem.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fa-solid fa-heart"></i>
+                    </div>
+                    <h3>Community Support</h3>
+                    <p>Join a community that values sustainable agriculture and supports local farming communities.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>About AgriMarket</h2>
+                <p>Connecting Local Farmers with Conscious Consumers</p>
+            </div>
+
+            <div class="about-content">
+                <div class="about-text">
+                    <p>E-Commerce for Agriculture: Building an Online Marketplace for Local Farmers is an innovative
+                        platform designed to connect local farmers directly with consumers, retailers, and distributors
+                        through a convenient and transparent online marketplace.</p>
+
+                    <p>The system aims to empower farmers by providing them with access to a wider market, fair pricing,
+                        and real-time sales opportunities, while offering consumers fresh, high-quality agricultural
+                        products directly from the source.</p>
+
+                    <p>This project promotes sustainable agriculture, supports local economies, and integrates digital
+                        technology into the agricultural supply chain. Through this platform, farmers can easily list
+                        their products, track sales, and communicate with buyers, while customers can browse, order, and
+                        pay securely—all in one place.</p>
+                </div>
+
+                <div class="about-features">
+                    <h3>Key Features</h3>
+                    <ul class="features-list">
+                        <li><i class="fa-solid fa-check-circle"></i><span>User-friendly marketplace for agricultural
+                                products</span></li>
+                        <li><i class="fa-solid fa-check-circle"></i><span>Farmer and buyer registration and profile
+                                management</span></li>
+                        <li><i class="fa-solid fa-check-circle"></i><span>Secure online transactions and payment
+                                integration</span></li>
+                        <li><i class="fa-solid fa-check-circle"></i><span>Real-time product updates and inventory
+                                management</span></li>
+                        <li><i class="fa-solid fa-check-circle"></i><span>Delivery and logistics tracking system</span>
+                        </li>
+                        <li><i class="fa-solid fa-check-circle"></i><span>Review and feedback system to ensure trust and
+                                quality</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div id="contact" class="contact-info">
+                <h3>Contact Information</h3>
+                <div class="contact-grid">
+                    <div class="contact-item">
+                        <i class="fa-solid fa-users"></i>
+                        <div>
+                            <h4>Project Team</h4>
+                            <p>CloudTech <br>(Software Development / Web Application Development (with
+                                focus on E-Commerce and AgriTech Systems)<br></p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fa-solid fa-file-signature"></i>
+                        <div>
+                            <h4>Project Title</h4>
+                            <p>E-Commerce for Agriculture: Building an Online Marketplace for Local Farmers</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fa-solid fa-envelope"></i>
+                        <div>
+                            <h4>Email</h4>
+                            <p>trancem260@gmail.com (agrimarketplace.nexus@gmail.com)</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fa-solid fa-phone"></i>
+                        <div>
+                            <h4>Phone</h4>
+                            <p>+63 912 345 6789</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fa-solid fa-building"></i>
+                        <div>
+                            <h4>Address</h4>
+                            <p>College of Information and Computer Studies<br>Gordon College, Olongapo City, Philippines
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="how-it-works">
+        <div class="container">
+            <div class="section-header">
+                <h2>How It Works</h2>
+                <p>Simple steps to get started with AgriMarket</p>
+            </div>
+
+            <div class="steps-container">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Sign Up</h3>
+                        <p>Create your account as a farmer or buyer in just a few minutes.</p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Browse or List</h3>
+                        <p>Farmers can list their products, buyers can browse and discover fresh produce.</p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Connect & Buy</h3>
+                        <p>Connect with each other, negotiate prices, and complete secure transactions.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- User Types Section -->
+    <section class="user-types">
+        <div class="container">
+            <div class="section-header">
+                <h2>Choose Your Path</h2>
+                <p>Join AgriMarket as either a farmer or buyer</p>
+            </div>
+
+            <div class="user-cards">
+                <div class="user-card farmer-card">
+                    <div class="card-header">
+                        <i class="fa-solid fa-seedling"></i>
+                        <h3>I'm a Farmer</h3>
+                    </div>
+                    <div class="card-content">
+                        <ul class="benefits-list">
+                            <li><i class="fa-solid fa-check"></i> List your products easily</li>
+                            <li><i class="fa-solid fa-check"></i> Connect directly with buyers</li>
+                            <li><i class="fa-solid fa-check"></i> Track your sales and earnings</li>
+                            <li><i class="fa-solid fa-check"></i> Build your farming business</li>
+                        </ul>
+                        <a href="register.html?type=farmer" class="btn btn-primary">Start Selling</a>
+                    </div>
+                </div>
+
+                <div class="user-card buyer-card">
+                    <div class="card-header">
+                        <i class="fa-solid fa-shopping-cart"></i>
+                        <h3>I'm a Buyer</h3>
+                    </div>
+                    <div class="card-content">
+                        <ul class="benefits-list">
+                            <li><i class="fa-solid fa-check"></i> Browse fresh local produce</li>
+                            <li><i class="fa-solid fa-check"></i> Support local farmers</li>
+                            <li><i class="fa-solid fa-check"></i> Get the best prices</li>
+                            <li><i class="fa-solid fa-check"></i> Enjoy quality guarantee</li>
+                        </ul>
+                        <a href="register.html?type=buyer" class="btn btn-primary">Start Shopping</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <h2>What Our Users Say</h2>
+                <p>Real stories from our community</p>
+            </div>
+
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"AgriMarket has transformed how I sell my produce. I can now reach customers directly and get
+                            fair prices for my organic vegetables."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-info">
+                            <h4>Sarah Johnson</h4>
+                            <span>Organic Farmer</span>
+                        </div>
+                        <div class="rating">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"I love knowing exactly where my food comes from. The quality is amazing and I'm supporting
+                            local farmers in my community."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-info">
+                            <h4>Michael Chen</h4>
+                            <span>Health-Conscious Buyer</span>
+                        </div>
+                        <div class="rating">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"The platform is so easy to use. I can manage my inventory, track sales, and communicate with
+                            buyers all in one place."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-info">
+                            <h4>Emily Rodriguez</h4>
+                            <span>Small Farm Owner</span>
+                        </div>
+                        <div class="rating">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Ready to Join AgriMarket?</h2>
+                <p>Start your journey towards sustainable agriculture today</p>
+                <div class="cta-buttons">
+                    <a href="register.html" class="btn btn-primary btn-large">
+                        <i class="fa-solid fa-rocket"></i>
+                        Get Started Now
+                    </a>
+                    <a href="login.html" class="btn btn-secondary btn-large">
+                        <i class="fa-solid fa-sign-in-alt"></i>
+                        Already Have Account?
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="brand">
+                        <i class="fa-solid fa-wheat-awn"></i>
+                        <span>AgriMarket</span>
+                    </div>
+                    <p>Connecting farmers and buyers for a sustainable agricultural future.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fa-brands fa-facebook"></i></a>
+                        <a href="#" class="social-link"><i class="fa-brands fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fa-brands fa-linkedin"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>For Farmers</h4>
+                    <ul>
+                        <li><a href="register.html?type=farmer">Start Selling</a></li>
+                        <li><a href="farmer_dashboard.html">Farmer Dashboard</a></li>
+                        <li><a href="#">Pricing</a></li>
+                        <li><a href="#">Support</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>For Buyers</h4>
+                    <ul>
+                        <li><a href="register.html?type=buyer">Start Shopping</a></li>
+                        <li><a href="buyer_dashboard.html">Buyer Dashboard</a></li>
+                        <li><a href="#">Browse Products</a></li>
+                        <li><a href="#">Help Center</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; <span id="year"></span> AgriMarket. All rights reserved.</p>
+                <div class="footer-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Cookie Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Chatbot -->
+    <div class="chatbot-container">
+        <div class="chatbot-window" id="chatbotWindow">
+            <div class="chatbot-header">
+                <div class="header-content">
+                    <i class="fa-solid fa-robot"></i>
+                    <div class="header-text">
+                        <h3>Help Assistant</h3>
+                        <span class="status">Online</span>
+                    </div>
+                </div>
+                <button class="chatbot-close" id="chatbotClose">
+                    <i class="fa-solid fa-times"></i>
+                </button>
+            </div>
+            <div class="chatbot-messages" id="chatbotMessages">
+                <div class="message bot-message">
+                    <div class="message-content">
+                        Hi there! 👋<br><br>I'm your AgriMarket assistant. I can help you with:<br><br>
+                        <strong>Getting Started:</strong><br>• Registration (farmer/buyer)<br>• How to use
+                        AgriMarket<br><br>
+                        <strong>Shopping & Selling:</strong><br>• Buying products<br>• Selling products<br>• Product
+                        management<br>• Order tracking<br><br>
+                        <strong>Account & Support:</strong><br>• Account management<br>• Password changes<br>• Dashboard
+                        guide<br>• Troubleshooting<br>• FAQ<br><br>
+                        <strong>Information:</strong><br>• Pricing & delivery<br>• Payment methods<br>• Security &
+                        privacy<br>• Returns & refunds<br><br>
+                        Ask me anything below!
+                    </div>
+                </div>
+            </div>
+            <div class="chatbot-input">
+                <input type="text" id="chatbotInput" placeholder="Type your message...">
+                <button id="chatbotSend">
+                    <i class="fa-solid fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+        <div class="chatbot-trigger" id="chatbotTrigger" title="Need help? Click or hover me!">
+            <i class="fa-solid fa-circle-question"></i>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Set current year
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Mobile menu toggle
+        const mobileToggle = document.getElementById('mobile-menu-toggle');
+        const nav = document.querySelector('.nav');
+
+        if (mobileToggle) {
+            mobileToggle.addEventListener('click', function () {
+                nav.classList.toggle('mobile-open');
+            });
+        }
+
+        // Add scroll effect to header
+        window.addEventListener('scroll', function () {
+            const header = document.querySelector('.site-header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Chatbot functionality
+        const chatbotWindow = document.getElementById('chatbotWindow');
+        const chatbotTrigger = document.getElementById('chatbotTrigger');
+        const chatbotClose = document.getElementById('chatbotClose');
+        const chatbotMessages = document.getElementById('chatbotMessages');
+        const chatbotInput = document.getElementById('chatbotInput');
+        const chatbotSend = document.getElementById('chatbotSend');
+        let showHint = true;
+
+        // Comprehensive bot responses with detailed information
+        const botResponses = {
+            greeting: [
+                "Hello! I'm here to help you with AgriMarket. How can I assist you today?",
+                "Hi there! I'm your AgriMarket assistant. What would you like to know?",
+                "Welcome! How can I help you navigate our platform?"
+            ],
+            default: "I'm here to help you with AgriMarket! Try asking about:<br>• Registration (farmer/buyer)<br>• Buying products<br>• Selling products<br>• Account management<br>• Orders<br>• Troubleshooting<br><br>What would you like to know?",
+
+            // Context-aware responses
+            howToUse: "AgriMarket is easy to use! 🌱<br><br><strong>For Buyers:</strong><br>1. Register and create your account<br>2. Browse products from local farmers<br>3. Add items to your cart<br>4. Checkout and make payment<br>5. Track your orders<br>6. Receive fresh produce!<br><br><strong>For Farmers:</strong><br>1. Register as a farmer<br>2. Access your dashboard<br>3. Add products with photos and details<br>4. Set prices and stock quantities<br>5. Manage incoming orders<br>6. Update order status<br><br>Need help with a specific step?",
+
+            register: "Registration Guide: 🚀<br><br><strong>Step-by-Step:</strong><br>1. Click <strong>'Register'</strong> button at the top navigation<br>2. Choose your role: <strong>Farmer</strong> or <strong>Buyer</strong><br>3. Fill in required information:<br>   • Username<br>   • Email address<br>   • Password (minimum 6 characters)<br>   • Contact information<br>4. Accept terms and conditions<br>5. Submit registration<br><br><strong>After Registration:</strong><br>• Buyers: Start shopping immediately<br>• Farmers: Access dashboard to add products<br><br>Ready to join our community?",
+
+            buying: "Complete Buying Guide: 🛒<br><br><strong>Step 1: Registration</strong><br>Register as a buyer account<br><br><strong>Step 2: Browse Products</strong><br>• Visit the shop page<br>• Search by product name or category<br>• View product details, prices, and stock<br>• Check farmer information<br><br><strong>Step 3: Add to Cart</strong><br>• Select quantity<br>• Click 'Add to Cart'<br>• Review items in cart<br><br><strong>Step 4: Checkout</strong><br>• Go to cart<br>• Review order details<br>• Confirm quantities and prices<br>• Place order<br><br><strong>Step 5: Track Orders</strong><br>• Visit 'Orders' page<br>• View order status<br>• Track delivery progress<br><br><strong>Step 6: Receive Products</strong><br>• Confirm delivery or pickup<br>• Leave reviews if desired<br><br>Want more details on any step?",
+
+            selling: "Complete Selling Guide: 👨‍🌾<br><br><strong>Step 1: Register as Farmer</strong><br>Create your farmer account<br><br><strong>Step 2: Access Dashboard</strong><br>• Login to your farmer dashboard<br>• View your sales overview<br><br><strong>Step 3: Add Products</strong><br>• Go to 'My Products' page<br>• Click 'Add Product'<br>• Fill in product details:<br>   • Product name<br>   • Description<br>   • Price per unit<br>   • Stock quantity<br>   • Upload product image<br>• Save product<br><br><strong>Step 4: Manage Products</strong><br>• Edit product information<br>• Update prices<br>• Update stock quantities<br>• Delete products if needed<br><br><strong>Step 5: Manage Orders</strong><br>• View incoming orders<br>• Update order status:<br>   • Pending → Processing → Shipped → Delivered<br>• Update payment status<br>• Track order completion<br><br><strong>Step 6: Monitor Sales</strong><br>• View order history<br>• Track earnings<br>• Manage inventory<br><br>Need help with product management?",
+
+            features: "AgriMarket Features: ✨<br><br><strong>Core Features:</strong><br>• Direct farm-to-buyer connection<br>• Fresh, local produce marketplace<br>• Fair pricing transparency<br>• Secure payment processing<br>• Real-time inventory tracking<br>• Order management system<br>• Product review system<br>• User dashboard (buyer/farmer)<br>• Responsive design for all devices<br><br><strong>Buyer Features:</strong><br>• Easy product browsing<br>• Shopping cart<br>• Order tracking<br>• Review products<br>• Account management<br><br><strong>Farmer Features:</strong><br>• Product management<br>• Order management<br>• Inventory control<br>• Sales tracking<br>• Stock updates<br><br>Which feature interests you?",
+
+            products: "Products Information: 🥬<br><br><strong>Available Products:</strong><br>• Fresh vegetables<br>• Organic fruits<br>• Local produce<br>• Seasonal items<br>• Farm-fresh eggs<br>• Herbs and spices<br>• All directly from farmers<br><br><strong>Product Details:</strong><br>Each product listing includes:<br>• Product name and description<br>• Price per unit<br>• Available stock quantity<br>• Product images<br>• Farmer information<br>• Reviews from buyers<br><br><strong>Browsing Tips:</strong><br>• Search by product name<br>• Browse by farmer<br>• Check stock availability<br>• Read product descriptions<br>• Check reviews before buying<br><br>Search by category or browse by farmer!",
+
+            pricing: "Pricing Information: 💰<br><br><strong>How Pricing Works:</strong><br>• Prices are set by individual farmers<br>• Fair compensation for quality products<br>• Transparent pricing displayed upfront<br>• No hidden fees or charges<br>• Support local agriculture<br><br><strong>Price Display:</strong><br>• Prices shown per unit (kg, piece, etc.)<br>• Clear pricing on product listings<br>• Total calculated automatically in cart<br>• Payment shown before checkout<br><br><strong>Price Factors:</strong><br>• Product quality<br>• Seasonal availability<br>• Farming practices<br>• Local market rates<br><br>See prices on each product listing!",
+
+            delivery: "Delivery & Shipping: 🚚<br><br><strong>Delivery Options:</strong><br>• Home delivery (varies by farmer)<br>• Pickup at farm location<br>• Local pickup points<br><br><strong>Delivery Information:</strong><br>• Delivery arrangements vary by farmer<br>• Check each product listing for details<br>• Contact farmer for specific delivery areas<br>• Delivery fees set by individual farmers<br><br><strong>What to Check:</strong><br>• Available delivery areas<br>• Delivery fees<br>• Pickup options<br>• Delivery timeframes<br>• Minimum order requirements<br><br><strong>After Order:</strong><br>• Track order status in 'Orders' page<br>• Updates on shipping status<br>• Delivery confirmation<br><br>Farmers set their own delivery policies. Check product details!",
+
+            payment: "Payment Information: 💳<br><br><strong>Payment Methods:</strong><br>• Secure online payments<br>• Multiple payment options available<br>• Verified transactions<br>• Protected customer data<br>• Trusted payment gateway<br><br><strong>Payment Process:</strong><br>1. Add products to cart<br>2. Review order total<br>3. Proceed to checkout<br>4. Select payment method<br>5. Complete payment securely<br>6. Receive payment confirmation<br><br><strong>Payment Security:</strong><br>• SSL encrypted transactions<br>• Secure payment processing<br>• No storage of payment details<br>• Verified payment gateway<br><br><strong>Payment Status:</strong><br>• Track payment status in orders<br>• Farmers can update payment status<br>• Payment confirmation notifications<br><br>Your payment security is our priority!",
+
+            about: "About AgriMarket: 📚<br><br><strong>Our Mission:</strong><br>We connect local farmers with buyers through an innovative online marketplace. Our platform promotes sustainable agriculture, supports local economies, and makes fresh produce accessible to everyone.<br><br><strong>What We Do:</strong><br>• Bridge the gap between farmers and consumers<br>• Support local agriculture<br>• Promote fresh, quality produce<br>• Create fair trading opportunities<br>• Build sustainable communities<br><br><strong>Our Values:</strong><br>• Supporting local farmers<br>• Fresh, quality produce<br>• Fair pricing<br>• Sustainable agriculture<br>• Community building<br><br>Want to learn more?",
+
+            contact: "Contact Information: 📧<br><br><strong>Get in Touch:</strong><br>• Email: agrimarketplace.nexus@gmail.com<br>• Phone: +63 912 345 6789<br>• Address: Gordon College, Olongapo City<br><br><strong>Support Hours:</strong><br>• Monday - Friday: 9:00 AM - 6:00 PM<br>• Saturday: 9:00 AM - 1:00 PM<br>• Sunday: Closed<br><br><strong>We Can Help With:</strong><br>• Account issues<br>• Order problems<br>• Technical support<br>• General inquiries<br>• Feedback and suggestions<br><br>We'd love to hear from you!",
+
+            farmerAdvantage: "Benefits for Farmers: 🌾<br><br><strong>Key Advantages:</strong><br>• Reach more customers online<br>• Fair pricing control<br>• Manage inventory easily<br>• Track sales and earnings<br>• Build your farming business<br>• Direct customer connection<br>• Expand market reach<br>• Reduce middlemen costs<br><br><strong>Tools Available:</strong><br>• Product management dashboard<br>• Order management system<br>• Inventory tracking<br>• Sales analytics<br>• Stock management<br>• Customer reviews<br><br><strong>Start Selling:</strong><br>1. Register as farmer<br>2. Add your products<br>3. Set competitive prices<br>4. Start receiving orders<br><br>Join as a farmer today!",
+
+            buyerAdvantage: "Benefits for Buyers: 🛍️<br><br><strong>Key Advantages:</strong><br>• Fresh, local produce<br>• Support local farmers<br>• Best prices<br>• Quality guarantee<br>• Secure transactions<br>• Direct from farm<br>• Seasonal availability<br>• Transparent pricing<br><br><strong>Features:</strong><br>• Easy browsing<br>• Shopping cart<br>• Order tracking<br>• Product reviews<br>• Account management<br>• Secure checkout<br><br><strong>Why Choose Us:</strong><br>• Fresh produce guarantee<br>• Support local agriculture<br>• Fair pricing<br>• Quality products<br>• Easy ordering process<br><br>Start shopping fresh today!",
+
+            // Account Management
+            account: "Account Management: 👤<br><br><strong>Profile Management:</strong><br>• Update personal information<br>• Change email address<br>• Update contact details<br>• Manage account settings<br><br><strong>Password Management:</strong><br>• Change password from dashboard<br>• Click 'Change Password' link<br>• Enter current password<br>• Set new password<br>• Confirm new password<br><br><strong>Dashboard Access:</strong><br>• Buyers: View orders, cart, shop<br>• Farmers: Manage products, orders, sales<br><br><strong>Security:</strong><br>• Secure login<br>• Password protection<br>• Session management<br>• Safe logout<br><br>Need help with your account?",
+
+            dashboard: "Dashboard Guide: 📊<br><br><strong>Buyer Dashboard:</strong><br>• View quick actions<br>• Access shop<br>• Check orders<br>• Manage cart<br>• Update account<br><br><strong>Farmer Dashboard:</strong><br>• View sales overview<br>• Quick access to products<br>• Manage orders<br>• Track inventory<br>• Monitor earnings<br><br><strong>Navigation:</strong><br>• Dashboard: Overview<br>• Products/Shop: Browse or manage<br>• Orders: Track orders<br>• Account: Settings<br><br><strong>Features:</strong><br>• Real-time updates<br>• Easy navigation<br>• Quick actions<br>• Status tracking<br><br>What would you like to manage?",
+
+            orders: "Order Management: 📦<br><br><strong>For Buyers:</strong><br>• View all your orders<br>• Track order status<br>• See order details<br>• Check delivery status<br>• Leave product reviews<br><br><strong>Order Status:</strong><br>• Pending: Order placed<br>• Processing: Farmer preparing<br>• Shipped: On the way<br>• Delivered: Received<br><br><strong>For Farmers:</strong><br>• View incoming orders<br>• Update order status<br>• Manage order payments<br>• Track order completion<br>• Process orders efficiently<br><br><strong>Order Details:</strong><br>• Product information<br>• Quantities<br>• Prices<br>• Total amount<br>• Customer information<br>• Order date<br><br>Need help with orders?",
+
+            productsManagement: "Product Management: 📝<br><br><strong>Add Products:</strong><br>1. Go to 'My Products' page<br>2. Click 'Add Product' button<br>3. Fill in product details:<br>   • Name<br>   • Description<br>   • Price<br>   • Stock quantity<br>   • Upload image<br>4. Save product<br><br><strong>Edit Products:</strong><br>• Click on product<br>• Update information<br>• Change price<br>• Update stock<br>• Modify description<br>• Save changes<br><br><strong>Delete Products:</strong><br>• Select product<br>• Click delete<br>• Confirm removal<br><br><strong>Stock Management:</strong><br>• Update quantities<br>• Track inventory<br>• Manage availability<br><br>Need help managing products?",
+
+            password: "Password Management: 🔒<br><br><strong>Change Password:</strong><br>1. Login to your account<br>2. Click 'Change Password' link<br>3. Enter current password<br>4. Enter new password (min 6 characters)<br>5. Confirm new password<br>6. Click 'Change Password'<br><br><strong>Password Requirements:</strong><br>• Minimum 6 characters<br>• Use strong passwords<br>• Mix letters and numbers<br>• Don't share your password<br><br><strong>Forgot Password:</strong><br>• Use 'Forgot Password' link<br>• Enter email address<br>• Check email for reset link<br>• Follow instructions<br><br><strong>Security Tips:</strong><br>• Use unique passwords<br>• Change regularly<br>• Don't reuse passwords<br>• Keep password secure<br><br>Need help with password?",
+
+            troubleshooting: "Troubleshooting: 🔧<br><br><strong>Common Issues:</strong><br><br><strong>Login Problems:</strong><br>• Check username/password<br>• Clear browser cache<br>• Try forgot password<br>• Contact support<br><br><strong>Order Issues:</strong><br>• Check order status<br>• Contact farmer directly<br>• Review order details<br>• Report problem<br><br><strong>Payment Problems:</strong><br>• Verify payment method<br>• Check payment status<br>• Contact support<br>• Review transaction<br><br><strong>Product Issues:</strong><br>• Check product availability<br>• Verify stock quantity<br>• Contact farmer<br>• Browse alternatives<br><br><strong>Technical Issues:</strong><br>• Refresh page<br>• Clear cache<br>• Try different browser<br>• Contact support<br><br>Still having issues? Contact us!",
+
+            faq: "Frequently Asked Questions: ❓<br><br><strong>Q: How do I register?</strong><br>A: Click 'Register', choose role (farmer/buyer), fill details, submit.<br><br><strong>Q: Can I change my password?</strong><br>A: Yes! Go to dashboard → Change Password → Follow steps.<br><br><strong>Q: How do I add products as farmer?</strong><br>A: Login → My Products → Add Product → Fill details → Save.<br><br><strong>Q: How do I track orders?</strong><br>A: Login → Orders page → View order status and details.<br><br><strong>Q: What payment methods?</strong><br>A: Secure online payments through our payment gateway.<br><br><strong>Q: How is delivery handled?</strong><br>A: Delivery options vary by farmer. Check product details.<br><br>More questions? Ask me!",
+
+            security: "Security & Privacy: 🔐<br><br><strong>Your Security:</strong><br>• Secure login system<br>• Password encryption<br>• Secure payment processing<br>• Protected personal data<br>• SSL encryption<br><br><strong>Privacy Protection:</strong><br>• Your data is protected<br>• No sharing of information<br>• Secure transactions<br>• Privacy policies followed<br><br><strong>Account Security:</strong><br>• Use strong passwords<br>• Don't share credentials<br>• Logout when done<br>• Report suspicious activity<br><br><strong>Payment Security:</strong><br>• Encrypted transactions<br>• Secure payment gateway<br>• No stored card details<br>• Verified payments<br><br>Your security is our priority!",
+
+            returns: "Returns & Refunds: ↩️<br><br><strong>Return Policy:</strong><br>• Contact farmer directly<br>• Discuss return arrangements<br>• Follow farmer's policy<br>• Report issues promptly<br><br><strong>Refund Process:</strong><br>• Contact farmer or support<br>• Explain issue<br>• Provide order details<br>• Follow resolution process<br><br><strong>Quality Issues:</strong><br>• Contact farmer immediately<br>• Report problem<br>• Provide photos if needed<br>• Request resolution<br><br><strong>Disputes:</strong><br>• Contact support team<br>• Provide order details<br>• Explain situation<br>• We'll help resolve<br><br>Need help with a return? Contact us!"
+        };
+
+        // Enhanced function to get bot response with comprehensive keyword matching
+        function getBotResponse(userMessage) {
+            const message = userMessage.toLowerCase().trim();
+
+            // Greeting patterns
+            if (message.match(/^(hi|hello|hey|greetings|good morning|good afternoon|good evening)/i)) {
+                return botResponses.greeting[Math.floor(Math.random() * botResponses.greeting.length)];
+            }
+
+            // Account management patterns
+            if (message.match(/(account|profile|manage account|account settings|my account)/i)) {
+                return botResponses.account;
+            }
+
+            // Password patterns
+            if (message.match(/(password|change password|reset password|forgot password|password help)/i)) {
+                return botResponses.password;
+            }
+
+            // Dashboard patterns
+            if (message.match(/(dashboard|my dashboard|farmer dashboard|buyer dashboard)/i)) {
+                return botResponses.dashboard;
+            }
+
+            // Order management patterns
+            if (message.match(/(order|orders|track order|order status|my orders|order history|tracking)/i)) {
+                return botResponses.orders;
+            }
+
+            // Product management patterns (for farmers)
+            if (message.match(/(manage product|add product|edit product|delete product|product management|my products|list product|update product|stock)/i)) {
+                return botResponses.productsManagement;
+            }
+
+            // Troubleshooting patterns
+            if (message.match(/(problem|issue|error|not working|trouble|help me|fix|broken|doesn't work|can't)/i)) {
+                return botResponses.troubleshooting;
+            }
+
+            // FAQ patterns
+            if (message.match(/(faq|frequently asked|question|questions|what if|how about)/i)) {
+                return botResponses.faq;
+            }
+
+            // Security patterns
+            if (message.match(/(security|privacy|secure|safe|protection|data protection|personal information)/i)) {
+                return botResponses.security;
+            }
+
+            // Returns/Refunds patterns
+            if (message.match(/(return|refund|return policy|refund policy|want to return|cancel order|dispute)/i)) {
+                return botResponses.returns;
+            }
+
+            // How to use / help patterns
+            if (message.match(/how (to use|do i use|does this|to get started|can i)/i) ||
+                message.includes('how to use') ||
+                message.includes('how do i') ||
+                message.match(/^use/) ||
+                (message.match(/^how/) && !message.match(/(much|many|long|far)/i))) {
+                return botResponses.howToUse;
+            }
+
+            // Help patterns
+            if (message.includes('help') || message.includes('assist') || message.includes('support')) {
+                if (!message.match(/(customer service|contact)/i)) {
+                    return botResponses.howToUse;
+                }
+            }
+
+            // Register / Sign up patterns
+            if (message.match(/(register|sign up|signup|join|create account|registration|sign in|login|log in)/i)) {
+                return botResponses.register;
+            }
+
+            // Buy / Purchase patterns
+            if (message.match(/(buy|purchase|shop|buying|shopping|order|shop here|how to buy|buying guide)/i)) {
+                return botResponses.buying;
+            }
+
+            // Sell / Farmer patterns
+            if (message.match(/(sell|selling|farmer|list product|add product|how to sell|selling guide|become farmer)/i)) {
+                return botResponses.selling;
+            }
+
+            // Features / About patterns
+            if (message.match(/(feature|benefit|what can|about the platform|tell me about|capabilities)/i)) {
+                return botResponses.features;
+            }
+
+            // Products patterns (general browsing)
+            if (message.match(/(product|item|vegetable|fruit|produce|what do you sell|what products|available|browse)/i)) {
+                return botResponses.products;
+            }
+
+            // Price / Cost patterns
+            if (message.match(/(price|cost|expensive|cheap|how much|pricing|rates)/i)) {
+                return botResponses.pricing;
+            }
+
+            // Delivery patterns
+            if (message.match(/(deliver|delivery|shipping|shipped|pickup|how to get|where|transport|ship)/i)) {
+                return botResponses.delivery;
+            }
+
+            // Payment patterns
+            if (message.match(/(pay|payment|money|card|cash|how to pay|payment method|payment options)/i)) {
+                return botResponses.payment;
+            }
+
+            // About us patterns
+            if (message.includes('about') || message.includes('what is')) {
+                if (message.match(/(market|platform|agrimarket|company|us|we)/i)) {
+                    return botResponses.about;
+                }
+            }
+
+            // Contact patterns
+            if (message.match(/(contact|email|phone|call|customer service|reach|get in touch|support)/i)) {
+                return botResponses.contact;
+            }
+
+            // Benefits for farmers
+            if (message.match(/(farmer benefit|why become a farmer|selling advantage|farmer advantage|why farmer)/i)) {
+                return botResponses.farmerAdvantage;
+            }
+
+            // Benefits for buyers
+            if (message.match(/(buyer benefit|why buy|shopping advantage|buyer advantage|why buyer)/i)) {
+                return botResponses.buyerAdvantage;
+            }
+
+            return botResponses.default;
+        }
+
+        // Function to add message
+        function addMessage(content, isBot) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${isBot ? 'bot-message' : 'user-message'}`;
+
+            if (isBot && content.includes('<')) {
+                // Allow HTML formatting for bot messages
+                messageDiv.innerHTML = `<div class="message-content">${content}</div>`;
+            } else {
+                messageDiv.innerHTML = `<div class="message-content"><p>${content}</p></div>`;
+            }
+
+            chatbotMessages.appendChild(messageDiv);
+            chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+        }
+
+        // Function to send message
+        function sendMessage() {
+            const message = chatbotInput.value.trim();
+            if (message === '') return;
+
+            addMessage(message, false);
+            chatbotInput.value = '';
+
+            // Simulate bot thinking
+            setTimeout(() => {
+                const botResponse = getBotResponse(message);
+                addMessage(botResponse, true);
+            }, 1000);
+        }
+
+        // Open chatbot
+        function openChatbot() {
+            chatbotWindow.classList.add('chatbot-open');
+            chatbotTrigger.classList.add('chatbot-active');
+            showHint = false;
+            setTimeout(() => chatbotInput.focus(), 300);
+        }
+
+        // Close chatbot
+        function closeChatbot() {
+            chatbotWindow.classList.remove('chatbot-open');
+            chatbotTrigger.classList.remove('chatbot-active');
+        }
+
+        // Event listeners
+        chatbotTrigger.addEventListener('click', () => {
+            if (chatbotWindow.classList.contains('chatbot-open')) {
+                closeChatbot();
+            } else {
+                openChatbot();
+            }
+        });
+
+        chatbotTrigger.addEventListener('mouseenter', () => {
+            if (!showHint) return;
+            chatbotTrigger.classList.add('chatbot-hover');
+        });
+
+        chatbotTrigger.addEventListener('mouseleave', () => {
+            chatbotTrigger.classList.remove('chatbot-hover');
+        });
+
+        chatbotClose.addEventListener('click', closeChatbot);
+
+        chatbotSend.addEventListener('click', sendMessage);
+
+        chatbotInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+    </script>
+</body>
+
+</html>

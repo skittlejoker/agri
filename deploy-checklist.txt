@@ -1,0 +1,74 @@
+GitHub Pages Deployment Checklist
+==================================
+
+BEFORE DEPLOYING:
+-----------------
+☐ All HTML files are in the root directory
+☐ style.css exists and is linked correctly
+☐ script.js exists and is linked correctly
+☐ help-assistant.js exists and is linked correctly
+☐ uploads/field.jpeg exists (for hero background)
+☐ All image paths use relative URLs (not absolute)
+☐ No PHP dependencies in static pages
+☐ .github/workflows/deploy.yml exists
+☐ .gitignore is configured correctly
+
+FILES TO COMMIT:
+----------------
+☐ index.html
+☐ style.css
+☐ script.js
+☐ help-assistant.js
+☐ All HTML pages (login.html, register.html, etc.)
+☐ uploads/ directory with images
+☐ .github/workflows/deploy.yml
+☐ .gitignore
+☐ README.md
+☐ DEPLOYMENT.md
+
+FILES TO EXCLUDE (via .gitignore):
+-----------------------------------
+☐ *.php files
+☐ config/ directory
+☐ api/ directory
+☐ vendor/ directory
+☐ PHPMailer/ directory
+☐ *.sql files
+☐ *.md files (except README.md and DEPLOYMENT.md)
+
+AFTER DEPLOYMENT:
+-----------------
+☐ Visit your GitHub Pages URL
+☐ Check that index.html loads correctly
+☐ Verify images load (especially uploads/field.jpeg)
+☐ Test navigation links
+☐ Check responsive design on mobile
+☐ Verify chatbot functionality
+☐ Test all interactive elements
+
+TROUBLESHOOTING:
+----------------
+If images don't load:
+- Check file paths in style.css
+- Verify uploads/ directory is committed
+- Check browser console for 404 errors
+
+If styling is broken:
+- Clear browser cache
+- Check CSS file is linked correctly
+- Verify all CSS paths are relative
+
+If deployment fails:
+- Check GitHub Actions tab for errors
+- Verify repository is Public
+- Check .github/workflows/deploy.yml syntax
+
+SUCCESS INDICATORS:
+-------------------
+✓ Site loads at https://YOUR_USERNAME.github.io/Agri_Market.io/
+✓ All images display correctly
+✓ Navigation works
+✓ Responsive design functions
+✓ No console errors
+✓ GitHub Actions shows successful deployment
+

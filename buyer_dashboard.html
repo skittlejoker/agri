@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buyer Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+
+<body data-page="buyer-dashboard">
+    <header class="site-header">
+        <div class="brand">
+            <i class="fa-solid fa-wheat-awn"></i>
+            <span>AgriMarket</span>
+        </div>
+        <nav class="nav">
+            <a href="buyer_dashboard.html" class="nav-link active">Dashboard</a>
+            <a href="buyer_shop.html" class="nav-link">Shop</a>
+            <a href="buyer_orders.html" class="nav-link">My Orders</a>
+            <a href="#" class="nav-link" id="changePasswordLink">Change Password</a>
+            <button id="helpBtn" class="btn btn-ghost" onclick="showHelpModal(); return false;"
+                title="Get Help (Press F1)">
+                <i class="fa-solid fa-circle-question"></i>
+                <span>Help</span>
+            </button>
+            <button id="logoutBtn" class="btn btn-ghost">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <span>Logout</span>
+            </button>
+        </nav>
+    </header>
+
+    <main class="container">
+        <div class="dashboard-header">
+            <h1>Buyer Dashboard</h1>
+            <div class="subtitle">Welcome, Buyer <strong id="buyerWelcome"></strong>!</div>
+        </div>
+
+        <section class="section">
+            <h3>Quick Actions</h3>
+            <div
+                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 1rem;">
+                <a href="buyer_shop.html" class="quick-action-card"
+                    style="text-decoration: none; display: block; padding: 2rem; background: white; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); transition: transform 0.2s, box-shadow 0.2s; text-align: center;">
+                    <i class="fa-solid fa-store"
+                        style="font-size: 3rem; color: #28a745; margin-bottom: 1rem; display: block;"></i>
+                    <h3 style="margin: 0; color: #333;">Shop</h3>
+                    <p style="margin: 0.5rem 0 0 0; color: #666;">Browse and purchase products</p>
+                </a>
+                <a href="buyer_orders.html" class="quick-action-card"
+                    style="text-decoration: none; display: block; padding: 2rem; background: white; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); transition: transform 0.2s, box-shadow 0.2s; text-align: center;">
+                    <i class="fa-solid fa-shopping-bag"
+                        style="font-size: 3rem; color: #007bff; margin-bottom: 1rem; display: block;"></i>
+                    <h3 style="margin: 0; color: #333;">My Orders</h3>
+                    <p style="margin: 0.5rem 0 0 0; color: #666;">View and track your orders</p>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Multi-Step Checkout Modal -->
+    <div class="modal" id="checkoutModal" aria-hidden="true">
+        <div class="modal-content" style="max-width: 700px; max-height: 90vh; overflow-y: auto;">
+            <div class="modal-header">
+                <h3>Checkout</h3>
+                <button class="icon-btn" id="closeCheckoutModal" aria-label="Close">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <!-- Progress Steps -->
+            <div style="padding: 1rem; border-bottom: 1px solid #eee;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div class="checkout-step" data-step="1" style="flex: 1; text-align: center;">
+                        <div class="step-number active">1</div>
+                        <div class="step-label">Cart Review</div>
+                    </div>
+                    <div style="flex: 1; height: 2px; background: #ddd; margin: 0 0.5rem;"></div>
+                    <div class="checkout-step" data-step="2" style="flex: 1; text-align: center;">
+                        <div class="step-number">2</div>
+                        <div class="step-label">Shipping</div>
+                    </div>
+                    <div style="flex: 1; height: 2px; background: #ddd; margin: 0 0.5rem;"></div>
+                    <div class="checkout-step" data-step="3" style="flex: 1; text-align: center;">
+                        <div class="step-number">3</div>
+                        <div class="step-label">Payment</div>
+                    </div>
+                    <div style="flex: 1; height: 2px; background: #ddd; margin: 0 0.5rem;"></div>
+                    <div class="checkout-step" data-step="4" style="flex: 1; text-align: center;">
+                        <div class="step-number">4</div>
+                        <div class="step-label">Review</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-body">
+                <!-- Step 1: Cart Review -->
+                <div id="checkout-step-1" class="checkout-step-content">
+                    <h4 style="margin-bottom: 1rem;">Review Your Cart</h4>
+                    <div id="checkoutCartItems"></div>
+                    <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #eee;">
+                        <div
+                            style="display: flex; justify-content: space-between; font-weight: 600; font-size: 1.1rem;">
+                            <span>Total:</span>
+                            <span id="checkoutTotal">$0.00</span>
+                        </div>
+                    </div>
+                    <div class="modal-footer" style="margin-top: 1rem;">
+                        <button type="button" class="btn btn-secondary" id="cancelCheckoutBtn">Cancel</button>
+                        <button type="button" class="btn btn-primary" id="nextToShippingBtn">
+                            Continue to Shipping <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 2: Shipping Information -->
+                <div id="checkout-step-2" class="checkout-step-content" style="display: none;">
+                    <h4 style="margin-bottom: 1rem;">Shipping Information</h4>
+                    <form id="shippingForm">
+                        <div class="form-group">
+                            <label for="fullName">Full Name *</label>
+                            <input type="text" id="fullName" placeholder="Enter your full name" required>
+                            <small class="error" id="fullNameError"></small>
+                        </div>
+                        <div class="form-group">
+                            <label for="contactNumber">Contact Number *</label>
+                            <input type="tel" id="contactNumber" placeholder="Enter your phone number" required>
+                            <small class="error" id="contactNumberError"></small>
+                        </div>
+                        <div class="form-group">
+                            <label for="deliveryAddress">Complete Delivery Address *</label>
+                            <textarea id="deliveryAddress" rows="3"
+                                placeholder="Street, Barangay, City, Province, ZIP Code" required></textarea>
+                            <small class="error" id="deliveryAddressError"></small>
+                        </div>
+                        <div class="form-group">
+                            <label for="deliveryMethod">Delivery Method *</label>
+                            <select id="deliveryMethod" required>
+                                <option value="">Select delivery method</option>
+                                <option value="standard">Standard Delivery (3-5 days)</option>
+                                <option value="express">Express Delivery (1-2 days)</option>
+                                <option value="pickup">Store Pickup</option>
+                            </select>
+                            <small class="error" id="deliveryMethodError"></small>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" id="backToCartBtn">
+                                <i class="fa-solid fa-arrow-left"></i> Back
+                            </button>
+                            <button type="button" class="btn btn-primary" id="nextToPaymentBtn">
+                                Continue to Payment <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Step 3: Payment Method -->
+                <div id="checkout-step-3" class="checkout-step-content" style="display: none;">
+                    <h4 style="margin-bottom: 1rem;">Choose Payment Method</h4>
+                    <div class="form-group">
+                        <div
+                            style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-top: 0.5rem;">
+                            <label class="payment-option" for="payment_ewallet">
+                                <input type="radio" name="payment_method" value="ewallet" id="payment_ewallet" checked>
+                                <div class="payment-card">
+                                    <i class="fa-solid fa-wallet"></i>
+                                    <span>E-Wallet</span>
+                                </div>
+                            </label>
+                            <label class="payment-option" for="payment_cod">
+                                <input type="radio" name="payment_method" value="cash_on_delivery" id="payment_cod">
+                                <div class="payment-card">
+                                    <i class="fa-solid fa-money-bill"></i>
+                                    <span>Cash on Delivery</span>
+                                </div>
+                            </label>
+                            <label class="payment-option" for="payment_gcash">
+                                <input type="radio" name="payment_method" value="gcash" id="payment_gcash">
+                                <div class="payment-card">
+                                    <i class="fa-brands fa-cc-paypal"></i>
+                                    <span>GCash</span>
+                                </div>
+                            </label>
+                            <label class="payment-option" for="payment_bank">
+                                <input type="radio" name="payment_method" value="bank_transfer" id="payment_bank">
+                                <div class="payment-card">
+                                    <i class="fa-solid fa-university"></i>
+                                    <span>Bank Transfer</span>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" id="backToShippingBtn">
+                            <i class="fa-solid fa-arrow-left"></i> Back
+                        </button>
+                        <button type="button" class="btn btn-primary" id="nextToReviewBtn">
+                            Review Order <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 4: Review and Confirm -->
+                <div id="checkout-step-4" class="checkout-step-content" style="display: none;">
+                    <h4 style="margin-bottom: 1rem;">Review and Confirm Order</h4>
+                    <div id="orderReviewSummary"></div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" id="backToPaymentBtn">
+                            <i class="fa-solid fa-arrow-left"></i> Back
+                        </button>
+                        <button type="button" class="btn btn-primary" id="confirmOrderBtn">
+                            <i class="fa-solid fa-check"></i> Place Order
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Order Confirmation Modal -->
+    <div class="modal" id="orderConfirmationModal" aria-hidden="true">
+        <div class="modal-content" style="max-width: 600px;">
+            <div class="modal-header">
+                <h3 style="color: #28a745;">
+                    <i class="fa-solid fa-check-circle"></i> Order Confirmed!
+                </h3>
+            </div>
+            <div class="modal-body">
+                <div id="orderConfirmationContent" style="text-align: center; padding: 2rem 0;">
+                    <div style="font-size: 3rem; color: #28a745; margin-bottom: 1rem;">
+                        <i class="fa-solid fa-check-circle"></i>
+                    </div>
+                    <h3 style="margin-bottom: 1rem;">Thank you for your order!</h3>
+                    <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; margin: 1rem 0;">
+                        <div style="margin-bottom: 0.5rem;">
+                            <strong>Order Number:</strong>
+                            <div style="font-size: 1.5rem; color: #28a745; font-weight: 600;" id="orderNumberDisplay">
+                            </div>
+                        </div>
+                        <div style="margin-top: 1rem; font-size: 0.9rem; color: #666;">
+                            <p>You will receive an email confirmation shortly.</p>
+                            <p>You can track your order in the "My Orders" section.</p>
+                        </div>
+                    </div>
+                    <div style="margin-top: 1.5rem;">
+                        <button class="btn btn-primary" id="viewOrdersBtn">
+                            <i class="fa-solid fa-list"></i> View My Orders
+                        </button>
+                        <button class="btn btn-secondary" id="continueShoppingBtn" style="margin-left: 0.5rem;">
+                            Continue Shopping
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Review Modal -->
+    <div class="modal" id="reviewModal" aria-hidden="true">
+        <div class="modal-content" style="max-width: 500px;">
+            <div class="modal-header">
+                <h3>Review Product</h3>
+                <button class="icon-btn" id="closeReviewModal" aria-label="Close">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="reviewForm">
+                    <input type="hidden" id="reviewOrderId">
+                    <div class="form-group">
+                        <label>Rating</label>
+                        <div id="ratingStars" style="display: flex; gap: 0.5rem; margin-top: 0.5rem; font-size: 2rem;">
+                            <i class="fa-regular fa-star" data-rating="1" style="cursor: pointer; color: #ffc107;"></i>
+                            <i class="fa-regular fa-star" data-rating="2" style="cursor: pointer; color: #ffc107;"></i>
+                            <i class="fa-regular fa-star" data-rating="3" style="cursor: pointer; color: #ffc107;"></i>
+                            <i class="fa-regular fa-star" data-rating="4" style="cursor: pointer; color: #ffc107;"></i>
+                            <i class="fa-regular fa-star" data-rating="5" style="cursor: pointer; color: #ffc107;"></i>
+                        </div>
+                        <input type="hidden" id="reviewRating" value="0" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="reviewComment">Review Comment</label>
+                        <textarea id="reviewComment" rows="4" placeholder="Write your review (optional)"></textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" id="cancelReviewBtn">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Submit Review</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Change Password Modal -->
+    <div class="modal" id="changePasswordModal" aria-hidden="true">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Change Password</h3>
+                <button class="icon-btn" id="closePasswordModal" aria-label="Close">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="changePasswordForm">
+                    <div class="form-group password-field">
+                        <label for="oldPassword">Current Password</label>
+                        <input type="password" id="oldPassword" placeholder="Enter your current password" required>
+                        <button type="button" class="password-toggle-btn" data-target="oldPassword"
+                            aria-label="Toggle password visibility">
+                            <i class="fa-solid fa-eye"></i>
+                        </button>
+                        <small class="error" id="oldPasswordError"></small>
+                    </div>
+                    <div class="form-group password-field">
+                        <label for="newPassword">New Password</label>
+                        <input type="password" id="newPassword" placeholder="Enter new password" required>
+                        <button type="button" class="password-toggle-btn" data-target="newPassword"
+                            aria-label="Toggle password visibility">
+                            <i class="fa-solid fa-eye"></i>
+                        </button>
+                        <small class="error" id="newPasswordError"></small>
+                    </div>
+                    <div class="form-group password-field">
+                        <label for="confirmNewPassword">Confirm New Password</label>
+                        <input type="password" id="confirmNewPassword" placeholder="Re-enter new password" required>
+                        <button type="button" class="password-toggle-btn" data-target="confirmNewPassword"
+                            aria-label="Toggle password visibility">
+                            <i class="fa-solid fa-eye"></i>
+                        </button>
+                        <small class="error" id="confirmNewPasswordError"></small>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" id="cancelPasswordBtn">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Change Password</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="script-php.js"></script>
+    <script src="help-assistant.js"></script>
+    <style>
+        .quick-action-card:hover {
+            transform: translateY(-4px) !important;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+        }
+    </style>
+</body>
+
+</html>

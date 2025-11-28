@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Your AgriMarket Account</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+
+<body data-page="register">
+    <main class="auth-container">
+        <section class="card">
+            <div class="card-header">
+                <i class="fa-solid fa-tractor"></i>
+                <h1>Create Your AgriMarket Account</h1>
+                <p class="subtitle">Join the AgriMarket community</p>
+            </div>
+            <form id="registerForm" class="form">
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label for="fullName">Full Name</label>
+                        <input type="text" id="fullName" name="fullName" placeholder="John Doe" required>
+                        <small class="error" id="fullNameError"></small>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" placeholder="john@example.com" required>
+                        <small class="error" id="emailError"></small>
+                    </div>
+                </div>
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" id="username" name="username" placeholder="johndoe" required>
+                        <small class="error" id="usernameError"></small>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" placeholder="••••••••" required>
+                        <small class="error" id="passwordError"></small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="confirmPassword">Confirm Password</label>
+                    <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Re-enter password"
+                        required>
+                    <small class="error" id="confirmPasswordError"></small>
+                </div>
+                <div class="form-group">
+                    <label for="userType">User Type</label>
+                    <select id="userType" required>
+                        <option value="" selected disabled>Select user type</option>
+                        <option value="farmer">Farmer</option>
+                        <option value="buyer">Buyer</option>
+                    </select>
+                    <small class="error" id="userTypeError"></small>
+                </div>
+
+                <div class="form-row terms">
+                    <label class="checkbox">
+                        <input type="checkbox" id="acceptTerms">
+                        <span>I accept the <a href="#" id="openTerms" class="link">Terms and Conditions</a></span>
+                    </label>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Register</button>
+                <p class="switch">Already have an account? <a href="index.html" class="link">Login</a></p>
+            </form>
+        </section>
+
+        <div class="modal" id="termsModal" aria-hidden="true">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Terms and Conditions</h3>
+                    <button class="icon-btn" id="closeTerms" aria-label="Close Terms">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+                <div class="modal-body scrollable">
+                    <div id="termsContent" class="terms-content hidden">
+                        <div class="terms-section">
+                            <h2><i class="fa-solid fa-gavel"></i> Terms of Service</h2>
+                            <p>By using the E-Commerce for Agriculture platform, users agree to comply with the
+                                following terms and conditions:</p>
+
+                            <h3>1. Account Responsibility</h3>
+                            <ul>
+                                <li><input type="checkbox" name="terms1"> Users must provide accurate and complete
+                                    information during registration.</li>
+                                <li><input type="checkbox" name="terms2"> Users are responsible for maintaining the
+                                    confidentiality of their login credentials.</li>
+                                <li><input type="checkbox" name="terms3"> Users must not share their account credentials
+                                    with unauthorized parties.</li>
+                            </ul>
+
+                            <h3>2. Product Listings</h3>
+                            <ul>
+                                <li><input type="checkbox" name="terms4"> Farmers are responsible for ensuring that the
+                                    products listed are genuine, safe, and comply with agricultural standards.</li>
+                                <li><input type="checkbox" name="terms5"> All product descriptions must be accurate and
+                                    truthful.</li>
+                                <li><input type="checkbox" name="terms6"> Sellers must not list counterfeit, expired, or
+                                    unsafe products.</li>
+                            </ul>
+
+                            <h3>3. Transactions</h3>
+                            <ul>
+                                <li><input type="checkbox" name="terms7"> All purchases and payments must be made
+                                    through the platform's secure payment gateway.</li>
+                                <li><input type="checkbox" name="terms8"> Refunds or disputes will follow the project's
+                                    refund policy.</li>
+                                <li><input type="checkbox" name="terms9"> Both parties must honor transaction
+                                    commitments.</li>
+                            </ul>
+
+                            <h3>4. Prohibited Activities</h3>
+                            <ul>
+                                <li><input type="checkbox" name="terms10"> Users must not engage in fraudulent
+                                    activities, data manipulation, or posting of misleading information.</li>
+                                <li><input type="checkbox" name="terms11"> Spamming, harassment, or abusive behavior is
+                                    strictly prohibited.</li>
+                                <li><input type="checkbox" name="terms12"> Users must comply with all applicable local
+                                    laws and regulations.</li>
+                            </ul>
+
+                            <h3>5. Service Modification</h3>
+                            <ul>
+                                <li><input type="checkbox" name="terms13"> The development team reserves the right to
+                                    modify or update platform features as needed to improve user experience and system
+                                    performance.</li>
+                                <li><input type="checkbox" name="terms14"> Users will be notified of significant changes
+                                    via email or platform notifications.</li>
+                            </ul>
+                        </div>
+
+                        <div class="terms-section">
+                            <h2><i class="fa-solid fa-shield-halved"></i> Privacy Policy</h2>
+                            <p>E-Commerce for Agriculture values the privacy and security of its users. This policy
+                                outlines how personal data is collected, used, and protected.</p>
+
+                            <h3>1. Information Collection</h3>
+                            <ul>
+                                <li><input type="checkbox" name="terms15"> The platform collects basic personal
+                                    information such as name, email address, contact number, and payment details only
+                                    for account registration and transaction purposes.</li>
+                                <li><input type="checkbox" name="terms16"> Additional information may be collected to
+                                    enhance platform services and user experience.</li>
+                            </ul>
+
+                            <h3>2. Data Usage</h3>
+                            <ul>
+                                <li><input type="checkbox" name="terms17"> Collected information is used solely to
+                                    facilitate transactions, verify accounts, and enhance platform services.</li>
+                                <li><input type="checkbox" name="terms18"> Personal data is never used for unauthorized
+                                    commercial purposes.</li>
+                            </ul>
+
+                            <h3>3. Data Protection</h3>
+                            <ul>
+                                <li><input type="checkbox" name="terms19"> All user data is encrypted and stored
+                                    securely to prevent unauthorized access, loss, or misuse.</li>
+                                <li><input type="checkbox" name="terms20"> We employ industry-standard security measures
+                                    to protect your information.</li>
+                            </ul>
+
+                            <h3>4. Third-Party Sharing</h3>
+                            <ul>
+                                <li><input type="checkbox" name="terms21"> The platform does not sell or share user data
+                                    with third parties, except when required by law or for essential service integration
+                                    (e.g., payment gateways, delivery partners).</li>
+                                <li><input type="checkbox" name="terms22"> All third-party integrations are carefully
+                                    vetted for security and privacy compliance.</li>
+                            </ul>
+
+                            <h3>5. User Rights</h3>
+                            <ul>
+                                <li><input type="checkbox" name="terms23"> Users can request access to, modification of,
+                                    or deletion of their personal data by contacting the support team.</li>
+                                <li><input type="checkbox" name="terms24"> Users have the right to withdraw consent for
+                                    data processing at any time.</li>
+                            </ul>
+                        </div>
+
+                        <p class="terms-acknowledgment"><strong>Acknowledgment:</strong> By clicking "I Understand", you
+                            confirm that you have read, understood, and agreed to both the Terms of Service and Privacy
+                            Policy stated above, and that you will use the E-Commerce for Agriculture platform
+                            responsibly and in compliance with all applicable laws and regulations.</p>
+                    </div>
+
+                    <div id="termsPlaceholder" class="terms-placeholder">
+                        <div class="placeholder-content">
+                            <i class="fa-solid fa-file-contract"></i>
+                            <h4>Terms and Conditions</h4>
+                            <p>Click "I Understand" to view and accept the terms and conditions.</p>
+                            <button class="btn btn-primary" id="showTermsBtn">
+                                <i class="fa-solid fa-eye"></i>
+                                View Terms
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" id="agreeTermsBtn">
+                        <i class="fa-solid fa-check"></i>
+                        I Understand
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="script-php.js?v=2.0"></script>
+</body>
+
+</html>

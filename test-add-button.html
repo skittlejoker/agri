@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Add Product Button</title>
+</head>
+<body>
+    <h1>Testing Add Product Button Functionality</h1>
+    <div id="test-results"></div>
+    <script>
+        // Test if button exists and is clickable
+        function testAddButton() {
+            const results = document.getElementById('test-results');
+            results.innerHTML = '<h2>Test Results:</h2><ul>';
+            
+            // Test 1: Check if button exists
+            const btn = document.getElementById('addProductBtn');
+            if (btn) {
+                results.innerHTML += '<li style="color: green;">✓ Button found</li>';
+            } else {
+                results.innerHTML += '<li style="color: red;">✗ Button NOT found</li>';
+                return;
+            }
+            
+            // Test 2: Check if button is enabled
+            if (!btn.disabled) {
+                results.innerHTML += '<li style="color: green;">✓ Button is enabled</li>';
+            } else {
+                results.innerHTML += '<li style="color: red;">✗ Button is disabled</li>';
+            }
+            
+            // Test 3: Check if button has click handler
+            const hasHandler = btn.onclick !== null || btn.getAttribute('onclick') !== null;
+            if (hasHandler) {
+                results.innerHTML += '<li style="color: green;">✓ Button has click handler</li>';
+            } else {
+                results.innerHTML += '<li style="color: orange;">⚠ Button may not have click handler (check addEventListener)</li>';
+            }
+            
+            // Test 4: Check form elements
+            const form = document.getElementById('addProductForm');
+            if (form) {
+                results.innerHTML += '<li style="color: green;">✓ Form found</li>';
+            } else {
+                results.innerHTML += '<li style="color: red;">✗ Form NOT found</li>';
+            }
+            
+            // Test 5: Check required fields
+            const nameField = document.getElementById('prodName');
+            const priceGramField = document.getElementById('prodPriceGram');
+            const priceKgField = document.getElementById('prodPriceKg');
+            
+            if (nameField && priceGramField && priceKgField) {
+                results.innerHTML += '<li style="color: green;">✓ All required fields found</li>';
+            } else {
+                results.innerHTML += '<li style="color: red;">✗ Some required fields missing</li>';
+            }
+            
+            // Test 6: Try to trigger click programmatically
+            try {
+                btn.click();
+                results.innerHTML += '<li style="color: green;">✓ Button click triggered successfully</li>';
+            } catch (e) {
+                results.innerHTML += '<li style="color: red;">✗ Error triggering button: ' + e.message + '</li>';
+            }
+            
+            results.innerHTML += '</ul>';
+        }
+        
+        // Run test when page loads
+        window.addEventListener('load', function() {
+            setTimeout(testAddButton, 500);
+        });
+    </script>
+</body>
+</html>
+
+
+

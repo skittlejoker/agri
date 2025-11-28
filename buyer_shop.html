@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop - Buyer Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+
+<body data-page="buyer-shop">
+    <header class="site-header">
+        <div class="brand">
+            <i class="fa-solid fa-wheat-awn"></i>
+            <span>AgriMarket</span>
+        </div>
+        <nav class="nav">
+            <a href="buyer_dashboard.html" class="nav-link">Dashboard</a>
+            <a href="buyer_shop.html" class="nav-link active">Shop</a>
+            <a href="buyer_orders.html" class="nav-link">My Orders</a>
+            <a href="#" class="nav-link" id="changePasswordLink">Change Password</a>
+            <button id="helpBtn" class="btn btn-ghost" onclick="showHelpModal(); return false;"
+                title="Get Help (Press F1)">
+                <i class="fa-solid fa-circle-question"></i>
+                <span>Help</span>
+            </button>
+            <button id="logoutBtn" class="btn btn-ghost">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <span>Logout</span>
+            </button>
+        </nav>
+    </header>
+
+    <main class="container">
+        <div class="dashboard-header">
+            <h1>Shop</h1>
+            <div class="subtitle">Browse and purchase fresh agricultural products</div>
+        </div>
+
+        <section class="section">
+            <div class="form-group">
+                <label for="search">Search products</label>
+                <input type="text" id="search" placeholder="Search by name">
+            </div>
+            <div id="shopProducts" class="products"></div>
+        </section>
+    </main>
+
+    <!-- Multi-Step Checkout Modal -->
+    <div class="modal" id="checkoutModal" aria-hidden="true">
+        <div class="modal-content" style="max-width: 700px; max-height: 90vh; overflow-y: auto;">
+            <div class="modal-header">
+                <h3>Checkout</h3>
+                <button class="icon-btn" id="closeCheckoutModal" aria-label="Close">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <!-- Progress Steps -->
+            <div style="padding: 1rem; border-bottom: 1px solid #eee;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div class="checkout-step" data-step="1" style="flex: 1; text-align: center;">
+                        <div class="step-number active">1</div>
+                        <div class="step-label">Order Review</div>
+                    </div>
+                    <div style="flex: 1; height: 2px; background: #ddd; margin: 0 0.5rem;"></div>
+                    <div class="checkout-step" data-step="2" style="flex: 1; text-align: center;">
+                        <div class="step-number">2</div>
+                        <div class="step-label">Shipping</div>
+                    </div>
+                    <div style="flex: 1; height: 2px; background: #ddd; margin: 0 0.5rem;"></div>
+                    <div class="checkout-step" data-step="3" style="flex: 1; text-align: center;">
+                        <div class="step-number">3</div>
+                        <div class="step-label">Payment</div>
+                    </div>
+                    <div style="flex: 1; height: 2px; background: #ddd; margin: 0 0.5rem;"></div>
+                    <div class="checkout-step" data-step="4" style="flex: 1; text-align: center;">
+                        <div class="step-number">4</div>
+                        <div class="step-label">Review</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-body">
+                <!-- Step 1: Order Review -->
+                <div id="checkout-step-1" class="checkout-step-content">
+                    <h4 style="margin-bottom: 1rem;">Review Your Order</h4>
+                    <div id="checkoutCartItems"></div>
+                    <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #eee;">
+                        <div
+                            style="display: flex; justify-content: space-between; font-weight: 600; font-size: 1.1rem;">
+                            <span>Total:</span>
+                            <span id="checkoutTotal">$0.00</span>
+                        </div>
+                    </div>
+                    <div class="modal-footer" style="margin-top: 1rem;">
+                        <button type="button" class="btn btn-secondary" id="cancelCheckoutBtn">Cancel</button>
+                        <button type="button" class="btn btn-primary" id="nextToShippingBtn">
+                            Continue to Shipping <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 2: Shipping Information -->
+                <div id="checkout-step-2" class="checkout-step-content" style="display: none;">
+                    <h4 style="margin-bottom: 1rem;">Shipping Information</h4>
+                    <form id="shippingForm">
+                        <div class="form-group">
+                            <label for="fullName">Full Name *</label>
+                            <input type="text" id="fullName" placeholder="Enter your full name" required>
+                            <small class="error" id="fullNameError"></small>
+                        </div>
+                        <div class="form-group">
+                            <label for="contactNumber">Contact Number *</label>
+                            <input type="tel" id="contactNumber" placeholder="Enter your phone number" required>
+                            <small class="error" id="contactNumberError"></small>
+                        </div>
+                        <div class="form-group">
+                            <label for="deliveryAddress">Complete Delivery Address *</label>
+                            <textarea id="deliveryAddress" rows="3"
+                                placeholder="Street, Barangay, City, Province, ZIP Code" required></textarea>
+                            <small class="error" id="deliveryAddressError"></small>
+                        </div>
+                        <div class="form-group">
+                            <label for="deliveryMethod">Delivery Method *</label>
+                            <select id="deliveryMethod" required>
+                                <option value="">Select delivery method</option>
+                                <option value="standard">Standard Delivery (3-5 days)</option>
+                                <option value="express">Express Delivery (1-2 days)</option>
+                                <option value="pickup">Store Pickup</option>
+                            </select>
+                            <small class="error" id="deliveryMethodError"></small>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" id="backToCartBtn">
+                                <i class="fa-solid fa-arrow-left"></i> Back
+                            </button>
+                            <button type="button" class="btn btn-primary" id="nextToPaymentBtn">
+                                Continue to Payment <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Step 3: Payment Method -->
+                <div id="checkout-step-3" class="checkout-step-content" style="display: none;">
+                    <h4 style="margin-bottom: 1rem;">Choose Payment Method</h4>
+                    <div class="form-group">
+                        <div
+                            style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-top: 0.5rem;">
+                            <label class="payment-option" for="payment_ewallet">
+                                <input type="radio" name="payment_method" value="ewallet" id="payment_ewallet" checked>
+                                <div class="payment-card">
+                                    <i class="fa-solid fa-wallet"></i>
+                                    <span>E-Wallet</span>
+                                </div>
+                            </label>
+                            <label class="payment-option" for="payment_cod">
+                                <input type="radio" name="payment_method" value="cash_on_delivery" id="payment_cod">
+                                <div class="payment-card">
+                                    <i class="fa-solid fa-money-bill"></i>
+                                    <span>Cash on Delivery</span>
+                                </div>
+                            </label>
+                            <label class="payment-option" for="payment_gcash">
+                                <input type="radio" name="payment_method" value="gcash" id="payment_gcash">
+                                <div class="payment-card">
+                                    <i class="fa-brands fa-cc-paypal"></i>
+                                    <span>GCash</span>
+                                </div>
+                            </label>
+                            <label class="payment-option" for="payment_bank">
+                                <input type="radio" name="payment_method" value="bank_transfer" id="payment_bank">
+                                <div class="payment-card">
+                                    <i class="fa-solid fa-university"></i>
+                                    <span>Bank Transfer</span>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" id="backToShippingBtn">
+                            <i class="fa-solid fa-arrow-left"></i> Back
+                        </button>
+                        <button type="button" class="btn btn-primary" id="nextToReviewBtn">
+                            Review Order <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 4: Review and Confirm -->
+                <div id="checkout-step-4" class="checkout-step-content" style="display: none;">
+                    <h4 style="margin-bottom: 1rem;">Review and Confirm Order</h4>
+                    <div id="orderReviewSummary"></div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" id="backToPaymentBtn">
+                            <i class="fa-solid fa-arrow-left"></i> Back
+                        </button>
+                        <button type="button" class="btn btn-primary" id="confirmOrderBtn">
+                            <i class="fa-solid fa-check"></i> Place Order
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- GCash Payment Modal -->
+    <div class="modal" id="gcashPaymentModal" aria-hidden="true">
+        <div class="modal-content" style="max-width: 500px;">
+            <div class="modal-header">
+                <h3>GCash Payment</h3>
+                <button class="icon-btn" id="closeGcashModal" aria-label="Close">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="gcashPaymentContent">
+                    <div style="text-align: center; margin-bottom: 1.5rem;">
+                        <p style="font-size: 1.1rem; margin-bottom: 0.5rem;"><strong>Amount to Pay:</strong></p>
+                        <p style="font-size: 1.5rem; color: #28a745; font-weight: 600;" id="gcashAmount">$0.00</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="gcashMobileNumber">GCash Mobile Number</label>
+                        <input type="tel" id="gcashMobileNumber" placeholder="09XX XXX XXXX" maxlength="11">
+                        <small class="error" id="gcashMobileError"></small>
+                    </div>
+
+                    <div style="text-align: center; margin: 2rem 0;">
+                        <div id="gcashQRCodeContainer" style="display: none;">
+                            <p style="margin-bottom: 1rem; font-weight: 600;">Scan this QR code to pay</p>
+                            <img id="gcashQRCode" src="" alt="GCash QR Code"
+                                style="max-width: 300px; border: 2px solid #ddd; border-radius: 8px; padding: 1rem; background: white;">
+                            <p style="margin-top: 1rem; font-size: 0.9rem; color: #666;">
+                                <strong>Verification Code:</strong> <span id="gcashVerificationCode"
+                                    style="font-family: monospace; font-size: 1.1rem; color: #28a745;"></span>
+                            </p>
+                            <p style="margin-top: 0.5rem; font-size: 0.85rem; color: #999;">
+                                After payment, enter the verification code below
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="form-group" id="gcashVerificationGroup" style="display: none;">
+                        <label for="gcashVerificationCodeInput">Verification Code</label>
+                        <input type="text" id="gcashVerificationCodeInput" placeholder="Enter verification code"
+                            maxlength="8" style="text-transform: uppercase;">
+                        <small class="error" id="gcashVerificationError"></small>
+                    </div>
+
+                    <div id="gcashPaymentStatus"
+                        style="display: none; padding: 1rem; border-radius: 8px; margin-top: 1rem; text-align: center;">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="cancelGcashBtn">Cancel</button>
+                <button type="button" class="btn btn-primary" id="generateGcashQRBtn">
+                    <i class="fa-solid fa-qrcode"></i> Generate QR Code
+                </button>
+                <button type="button" class="btn btn-primary" id="verifyGcashPaymentBtn" style="display: none;">
+                    <i class="fa-solid fa-check"></i> Verify Payment
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bank Transfer Payment Modal -->
+    <div class="modal" id="bankTransferModal" aria-hidden="true">
+        <div class="modal-content" style="max-width: 600px;">
+            <div class="modal-header">
+                <h3>Bank Transfer Payment</h3>
+                <button class="icon-btn" id="closeBankModal" aria-label="Close">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="bankTransferContent">
+                    <div style="text-align: center; margin-bottom: 1.5rem;">
+                        <p style="font-size: 1.1rem; margin-bottom: 0.5rem;"><strong>Amount to Transfer:</strong></p>
+                        <p style="font-size: 1.5rem; color: #28a745; font-weight: 600;" id="bankAmount">$0.00</p>
+                    </div>
+
+                    <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; margin-bottom: 1.5rem;">
+                        <h5 style="margin: 0 0 1rem 0; color: #28a745;">Merchant Bank Details</h5>
+                        <div style="font-size: 0.95rem;">
+                            <div style="margin-bottom: 0.5rem;"><strong>Bank:</strong> <span id="merchantBankName">BDO
+                                    (Banco de Oro)</span></div>
+                            <div style="margin-bottom: 0.5rem;"><strong>Account Number:</strong> <span
+                                    id="merchantAccountNumber" style="font-family: monospace;">1234-5678-9012</span>
+                            </div>
+                            <div style="margin-bottom: 0.5rem;"><strong>Account Name:</strong> <span
+                                    id="merchantAccountName">AgriMarket Inc.</span></div>
+                            <div><strong>SWIFT Code:</strong> <span id="merchantSwiftCode"
+                                    style="font-family: monospace;">BNORPHMM</span></div>
+                        </div>
+                    </div>
+
+                    <form id="bankTransferForm">
+                        <div class="form-group">
+                            <label for="bankName">Your Bank Name *</label>
+                            <input type="text" id="bankName" placeholder="e.g., BDO, BPI, Metrobank" required>
+                            <small class="error" id="bankNameError"></small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="bankAccountNumber">Your Account Number *</label>
+                            <input type="text" id="bankAccountNumber" placeholder="Enter your account number" required>
+                            <small class="error" id="bankAccountNumberError"></small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="bankAccountName">Account Holder Name *</label>
+                            <input type="text" id="bankAccountName" placeholder="Name as it appears on your account"
+                                required>
+                            <small class="error" id="bankAccountNameError"></small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="transferReference">Transfer Reference Number *</label>
+                            <input type="text" id="transferReference" placeholder="Transaction reference from your bank"
+                                required>
+                            <small class="error" id="transferReferenceError"></small>
+                            <small style="color: #666; display: block; margin-top: 0.25rem;">Enter the reference number
+                                from your bank transfer</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="transferDate">Transfer Date *</label>
+                            <input type="datetime-local" id="transferDate" required>
+                            <small class="error" id="transferDateError"></small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="paymentProof">Upload Proof of Payment (Optional)</label>
+                            <input type="file" id="paymentProof" accept="image/*,.pdf">
+                            <small style="color: #666; display: block; margin-top: 0.25rem;">Upload screenshot or
+                                receipt of your bank transfer</small>
+                        </div>
+                    </form>
+
+                    <div id="bankTransferStatus"
+                        style="display: none; padding: 1rem; border-radius: 8px; margin-top: 1rem; text-align: center;">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="cancelBankBtn">Cancel</button>
+                <button type="button" class="btn btn-primary" id="submitBankTransferBtn">
+                    <i class="fa-solid fa-check"></i> Submit Transfer Details
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Order Confirmation Modal -->
+    <div class="modal" id="orderConfirmationModal" aria-hidden="true">
+        <div class="modal-content" style="max-width: 600px;">
+            <div class="modal-header">
+                <h3 style="color: #28a745;">
+                    <i class="fa-solid fa-check-circle"></i> Order Confirmed!
+                </h3>
+            </div>
+            <div class="modal-body">
+                <div id="orderConfirmationContent" style="text-align: center; padding: 2rem 0;">
+                    <div style="font-size: 3rem; color: #28a745; margin-bottom: 1rem;">
+                        <i class="fa-solid fa-check-circle"></i>
+                    </div>
+                    <h3 style="margin-bottom: 1rem;">Thank you for your order!</h3>
+                    <div style="background: #f8f9fa; padding: 1.5rem; border-radius: 8px; margin: 1rem 0;">
+                        <div style="margin-bottom: 0.5rem;">
+                            <strong>Order Number:</strong>
+                            <div style="font-size: 1.5rem; color: #28a745; font-weight: 600;" id="orderNumberDisplay">
+                            </div>
+                        </div>
+                        <div style="margin-top: 1rem; font-size: 0.9rem; color: #666;">
+                            <p>You will receive an email confirmation shortly.</p>
+                            <p>You can track your order in the "My Orders" section.</p>
+                        </div>
+                    </div>
+                    <div style="margin-top: 1.5rem;">
+                        <button class="btn btn-primary" id="viewOrdersBtn">
+                            <i class="fa-solid fa-list"></i> View My Orders
+                        </button>
+                        <button class="btn btn-secondary" id="continueShoppingBtn" style="margin-left: 0.5rem;">
+                            Continue Shopping
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Change Password Modal -->
+    <div class="modal" id="changePasswordModal" aria-hidden="true">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Change Password</h3>
+                <button class="icon-btn" id="closePasswordModal" aria-label="Close">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="changePasswordForm">
+                    <div class="form-group password-field">
+                        <label for="oldPassword">Current Password</label>
+                        <input type="password" id="oldPassword" placeholder="Enter your current password" required>
+                        <button type="button" class="password-toggle-btn" data-target="oldPassword"
+                            aria-label="Toggle password visibility">
+                            <i class="fa-solid fa-eye"></i>
+                        </button>
+                        <small class="error" id="oldPasswordError"></small>
+                    </div>
+                    <div class="form-group password-field">
+                        <label for="newPassword">New Password</label>
+                        <input type="password" id="newPassword" placeholder="Enter new password" required>
+                        <button type="button" class="password-toggle-btn" data-target="newPassword"
+                            aria-label="Toggle password visibility">
+                            <i class="fa-solid fa-eye"></i>
+                        </button>
+                        <small class="error" id="newPasswordError"></small>
+                    </div>
+                    <div class="form-group password-field">
+                        <label for="confirmNewPassword">Confirm New Password</label>
+                        <input type="password" id="confirmNewPassword" placeholder="Re-enter new password" required>
+                        <button type="button" class="password-toggle-btn" data-target="confirmNewPassword"
+                            aria-label="Toggle password visibility">
+                            <i class="fa-solid fa-eye"></i>
+                        </button>
+                        <small class="error" id="confirmNewPasswordError"></small>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" id="cancelPasswordBtn">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Change Password</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="script-php.js"></script>
+    <script src="help-assistant.js"></script>
+    <script src="buyer-shop.js"></script>
+</body>
+
+</html>

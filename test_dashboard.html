@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Dashboard - AgriMarket</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+
+<body>
+    <div class="dashboard-container">
+        <!-- Left Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i class="fa-solid fa-wheat-awn"></i>
+                    <span>AgriMarket</span>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a href="#dashboard" class="nav-link active" data-section="dashboard">
+                            <i class="fa-solid fa-chart-line"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#products" class="nav-link" data-section="products">
+                            <i class="fa-solid fa-seedling"></i>
+                            <span>My Products</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#add-product" class="nav-link" data-section="add-product">
+                            <i class="fa-solid fa-plus"></i>
+                            <span>Add New Product</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Dashboard Section -->
+            <section id="dashboard" class="content-section active">
+                <div class="page-header">
+                    <h1>Welcome, Farmer <span id="farmer-name">John</span>!</h1>
+                    <p class="page-subtitle">Manage your farm products and track your business</p>
+                </div>
+
+                <!-- Summary Cards -->
+                <div class="summary-cards">
+                    <div class="summary-card">
+                        <div class="card-icon">
+                            <i class="fa-solid fa-seedling"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3>12</h3>
+                            <p>Total Products</p>
+                        </div>
+                    </div>
+
+                    <div class="summary-card">
+                        <div class="card-icon">
+                            <i class="fa-solid fa-shopping-cart"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3>8</h3>
+                            <p>Orders</p>
+                        </div>
+                    </div>
+
+                    <div class="summary-card">
+                        <div class="card-icon">
+                            <i class="fa-solid fa-dollar-sign"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3>$1,250</h3>
+                            <p>Earnings</p>
+                        </div>
+                    </div>
+
+                    <div class="summary-card">
+                        <div class="card-icon">
+                            <i class="fa-solid fa-truck"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3>3</h3>
+                            <p>Pending Deliveries</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Add Product Section -->
+            <section id="add-product" class="content-section">
+                <div class="page-header">
+                    <h1>Add New Product</h1>
+                    <p class="page-subtitle">Add a new product to your inventory</p>
+                </div>
+
+                <div class="form-container">
+                    <form id="add-product-form" class="product-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="product-name">Product Name</label>
+                                <input type="text" id="product-name" name="product_name"
+                                    placeholder="e.g., Organic Carrots" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="product-price">Price (USD)</label>
+                                <input type="number" id="product-price" name="product_price" step="0.01"
+                                    placeholder="3.50" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="product-description">Description</label>
+                            <textarea id="product-description" name="product_description"
+                                placeholder="Describe your product..." rows="4"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="product-stock">Stock Quantity</label>
+                            <input type="number" id="product-stock" name="product_stock" placeholder="100" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="product-image">Product Image</label>
+                            <div class="image-upload-container">
+                                <input type="file" id="product-image" name="product_image" accept="image/*"
+                                    onchange="previewImage(this)">
+                                <div class="image-preview" id="image-preview">
+                                    <i class="fa-solid fa-cloud-upload-alt"></i>
+                                    <p>Click to upload or drag and drop</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-large">
+                            <i class="fa-solid fa-plus"></i>
+                            Add Product
+                        </button>
+                    </form>
+                </div>
+            </section>
+
+            <!-- My Products Section -->
+            <section id="products" class="content-section">
+                <div class="page-header">
+                    <h1>My Products</h1>
+                    <p class="page-subtitle">Manage your product inventory</p>
+                </div>
+
+                <div class="products-table-container">
+                    <table class="products-table">
+                        <thead>
+                            <tr>
+                                <th>Image</th>
+                                <th>Name</th>
+                                <th>Price</th>
+                                <th>Stock</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <img src="https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?w=100"
+                                        alt="Organic Carrots" class="product-image">
+                                </td>
+                                <td>
+                                    <strong>Organic Carrots</strong>
+                                    <br><small style="color: var(--text-light);">Fresh organic carrots from local
+                                        farm</small>
+                                </td>
+                                <td><strong>$3.50</strong></td>
+                                <td>
+                                    <span class="stock-badge in-stock">50 units</span>
+                                </td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <button class="action-btn edit-btn" title="Edit">
+                                            <i class="fa-solid fa-edit"></i>
+                                        </button>
+                                        <button class="action-btn delete-btn" title="Delete">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <img src="https://images.unsplash.com/photo-1546470427-5c1d0b0b0b0b?w=100"
+                                        alt="Fresh Tomatoes" class="product-image">
+                                </td>
+                                <td>
+                                    <strong>Fresh Tomatoes</strong>
+                                    <br><small style="color: var(--text-light);">Ripe red tomatoes, perfect for
+                                        salads</small>
+                                </td>
+                                <td><strong>$4.00</strong></td>
+                                <td>
+                                    <span class="stock-badge low-stock">5 units</span>
+                                </td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <button class="action-btn edit-btn" title="Edit">
+                                            <i class="fa-solid fa-edit"></i>
+                                        </button>
+                                        <button class="action-btn delete-btn" title="Delete">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Mobile Menu Toggle -->
+    <button class="mobile-menu-toggle" id="mobile-menu-toggle">
+        <i class="fa-solid fa-bars"></i>
+    </button>
+
+    <script>
+        // Basic functionality for testing
+        document.addEventListener('DOMContentLoaded', function () {
+            // Navigation
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function (e) {
+                    e.preventDefault();
+
+                    // Update active nav link
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    this.classList.add('active');
+
+                    // Show target section
+                    document.querySelectorAll('.content-section').forEach(section => {
+                        section.classList.remove('active');
+                    });
+
+                    const targetSection = this.getAttribute('data-section');
+                    document.getElementById(targetSection).classList.add('active');
+                });
+            });
+
+            // Mobile menu toggle
+            const mobileToggle = document.getElementById('mobile-menu-toggle');
+            const sidebar = document.querySelector('.sidebar');
+
+            mobileToggle.addEventListener('click', function () {
+                sidebar.classList.toggle('open');
+            });
+
+            // Image preview
+            function previewImage(input) {
+                const preview = document.getElementById('image-preview');
+
+                if (input.files && input.files[0]) {
+                    const reader = new FileReader();
+
+                    reader.onload = function (e) {
+                        preview.innerHTML = `<img src="${e.target.result}" alt="Product preview">`;
+                    };
+
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+
+            // Form submission
+            const form = document.getElementById('add-product-form');
+            if (form) {
+                form.addEventListener('submit', function (e) {
+                    e.preventDefault();
+                    alert('Product would be added! (This is a demo)');
+                });
+            }
+        });
+    </script>
+</body>
+
+
+
+

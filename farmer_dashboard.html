@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farmer Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+
+<body data-page="farmer-dashboard">
+    <header class="site-header">
+        <div class="brand">
+            <i class="fa-solid fa-wheat-awn"></i>
+            <span>AgriMarket</span>
+        </div>
+        <nav class="nav">
+            <a href="farmer_dashboard.html" class="nav-link active">Dashboard</a>
+            <a href="farmer_products.html" class="nav-link">My Products</a>
+            <a href="farmer_orders.html" class="nav-link">Orders</a>
+            <a href="farmer_reviews.html" class="nav-link">Reviews</a>
+            <a href="#" class="nav-link" id="changePasswordLink">Change Password</a>
+            <button id="helpBtn" class="btn btn-ghost" onclick="showHelpModal(); return false;"
+                title="Get Help (Press F1)">
+                <i class="fa-solid fa-circle-question"></i>
+                <span>Help</span>
+            </button>
+            <button id="logoutBtn" class="btn btn-ghost">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <span>Logout</span>
+            </button>
+        </nav>
+    </header>
+
+    <main class="container">
+        <div class="dashboard-header">
+            <h1>Farmer Dashboard</h1>
+            <div class="subtitle">Welcome, Farmer <strong id="farmerWelcome"></strong>!</div>
+        </div>
+
+        <section class="section">
+            <h3>Quick Actions</h3>
+            <div
+                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 1rem;">
+                <a href="farmer_products.html" class="quick-action-card"
+                    style="text-decoration: none; display: block; padding: 2rem; background: white; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); transition: transform 0.2s, box-shadow 0.2s; text-align: center;">
+                    <i class="fa-solid fa-box"
+                        style="font-size: 3rem; color: #28a745; margin-bottom: 1rem; display: block;"></i>
+                    <h3 style="margin: 0; color: #333;">My Products</h3>
+                    <p style="margin: 0.5rem 0 0 0; color: #666;">Manage your products</p>
+                </a>
+                <a href="farmer_orders.html" class="quick-action-card"
+                    style="text-decoration: none; display: block; padding: 2rem; background: white; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); transition: transform 0.2s, box-shadow 0.2s; text-align: center;">
+                    <i class="fa-solid fa-shopping-cart"
+                        style="font-size: 3rem; color: #007bff; margin-bottom: 1rem; display: block;"></i>
+                    <h3 style="margin: 0; color: #333;">Orders</h3>
+                    <p style="margin: 0.5rem 0 0 0; color: #666;">View and manage orders</p>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Change Password Modal -->
+    <div class="modal" id="changePasswordModal" aria-hidden="true">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Change Password</h3>
+                <button class="icon-btn" id="closePasswordModal" aria-label="Close">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="changePasswordForm">
+                    <div class="form-group password-field">
+                        <label for="oldPassword">Current Password</label>
+                        <input type="password" id="oldPassword" placeholder="Enter your current password" required>
+                        <button type="button" class="password-toggle-btn" data-target="oldPassword"
+                            aria-label="Toggle password visibility">
+                            <i class="fa-solid fa-eye"></i>
+                        </button>
+                        <small class="error" id="oldPasswordError"></small>
+                    </div>
+                    <div class="form-group password-field">
+                        <label for="newPassword">New Password</label>
+                        <input type="password" id="newPassword" placeholder="Enter new password" required>
+                        <button type="button" class="password-toggle-btn" data-target="newPassword"
+                            aria-label="Toggle password visibility">
+                            <i class="fa-solid fa-eye"></i>
+                        </button>
+                        <small class="error" id="newPasswordError"></small>
+                    </div>
+                    <div class="form-group password-field">
+                        <label for="confirmNewPassword">Confirm New Password</label>
+                        <input type="password" id="confirmNewPassword" placeholder="Re-enter new password" required>
+                        <button type="button" class="password-toggle-btn" data-target="confirmNewPassword"
+                            aria-label="Toggle password visibility">
+                            <i class="fa-solid fa-eye"></i>
+                        </button>
+                        <small class="error" id="confirmNewPasswordError"></small>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" id="cancelPasswordBtn">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Change Password</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="script-php.js"></script>
+    <script src="help-assistant.js"></script>
+    <script src="farmer-dashboard.js"></script>
+    <style>
+        .quick-action-card:hover {
+            transform: translateY(-4px) !important;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+        }
+    </style>
+</body>
+
+</html>

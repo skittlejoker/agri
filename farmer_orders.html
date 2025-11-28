@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Orders - Farmer Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+
+<body data-page="farmer-orders">
+    <header class="site-header">
+        <div class="brand">
+            <i class="fa-solid fa-wheat-awn"></i>
+            <span>AgriMarket</span>
+        </div>
+        <nav class="nav">
+            <a href="farmer_dashboard.html" class="nav-link">Dashboard</a>
+            <a href="farmer_products.html" class="nav-link">My Products</a>
+            <a href="farmer_orders.html" class="nav-link active">Orders</a>
+            <a href="farmer_reviews.html" class="nav-link">Reviews</a>
+            <a href="#" class="nav-link" id="changePasswordLink">Change Password</a>
+            <button id="helpBtn" class="btn btn-ghost" onclick="showHelpModal(); return false;"
+                title="Get Help (Press F1)">
+                <i class="fa-solid fa-circle-question"></i>
+                <span>Help</span>
+            </button>
+            <button id="logoutBtn" class="btn btn-ghost">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <span>Logout</span>
+            </button>
+        </nav>
+    </header>
+
+    <main class="container">
+        <div class="dashboard-header">
+            <h1>Orders Received</h1>
+            <div class="subtitle">Manage all orders from buyers</div>
+        </div>
+
+        <section class="section">
+            <h3>Orders to Ship</h3>
+            <div id="ordersToShip" style="min-height: 100px;">
+                <div style="text-align: center; padding: 1rem;">
+                    <i class="fa-solid fa-spinner fa-spin" style="font-size: 1.5rem; color: #28a745;"></i>
+                    <p style="margin-top: 0.5rem; color: #666;">Loading orders...</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h3>Shipped Orders</h3>
+            <div id="shippedOrders" style="min-height: 100px;">
+                <div style="text-align: center; padding: 1rem;">
+                    <i class="fa-solid fa-spinner fa-spin" style="font-size: 1.5rem; color: #28a745;"></i>
+                    <p style="margin-top: 0.5rem; color: #666;">Loading orders...</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h3>All Orders</h3>
+            <div id="allOrders" style="min-height: 100px;">
+                <div style="text-align: center; padding: 1rem;">
+                    <i class="fa-solid fa-spinner fa-spin" style="font-size: 1.5rem; color: #28a745;"></i>
+                    <p style="margin-top: 0.5rem; color: #666;">Loading orders...</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Change Password Modal -->
+    <div class="modal" id="changePasswordModal" aria-hidden="true">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Change Password</h3>
+                <button class="icon-btn" id="closePasswordModal" aria-label="Close">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="changePasswordForm">
+                    <div class="form-group password-field">
+                        <label for="oldPassword">Current Password</label>
+                        <input type="password" id="oldPassword" placeholder="Enter your current password" required>
+                        <button type="button" class="password-toggle-btn" data-target="oldPassword"
+                            aria-label="Toggle password visibility">
+                            <i class="fa-solid fa-eye"></i>
+                        </button>
+                        <small class="error" id="oldPasswordError"></small>
+                    </div>
+                    <div class="form-group password-field">
+                        <label for="newPassword">New Password</label>
+                        <input type="password" id="newPassword" placeholder="Enter new password" required>
+                        <button type="button" class="password-toggle-btn" data-target="newPassword"
+                            aria-label="Toggle password visibility">
+                            <i class="fa-solid fa-eye"></i>
+                        </button>
+                        <small class="error" id="newPasswordError"></small>
+                    </div>
+                    <div class="form-group password-field">
+                        <label for="confirmNewPassword">Confirm New Password</label>
+                        <input type="password" id="confirmNewPassword" placeholder="Re-enter new password" required>
+                        <button type="button" class="password-toggle-btn" data-target="confirmNewPassword"
+                            aria-label="Toggle password visibility">
+                            <i class="fa-solid fa-eye"></i>
+                        </button>
+                        <small class="error" id="confirmNewPasswordError"></small>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" id="cancelPasswordBtn">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Change Password</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="script-php.js"></script>
+    <script src="help-assistant.js"></script>
+    <script src="farmer-orders.js?v=2"></script>
+</body>
+
+</html>

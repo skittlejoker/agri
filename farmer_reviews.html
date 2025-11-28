@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Reviews - Farmer Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+
+<body data-page="farmer-reviews">
+    <header class="site-header">
+        <div class="brand">
+            <i class="fa-solid fa-wheat-awn"></i>
+            <span>AgriMarket</span>
+        </div>
+        <nav class="nav">
+            <a href="farmer_dashboard.html" class="nav-link">Dashboard</a>
+            <a href="farmer_products.html" class="nav-link">My Products</a>
+            <a href="farmer_orders.html" class="nav-link">Orders</a>
+            <a href="farmer_reviews.html" class="nav-link active">Reviews</a>
+            <a href="#" class="nav-link" id="changePasswordLink">Change Password</a>
+            <button id="helpBtn" class="btn btn-ghost" onclick="showHelpModal(); return false;" title="Get Help (Press F1)">
+                <i class="fa-solid fa-circle-question"></i>
+                <span>Help</span>
+            </button>
+            <button id="logoutBtn" class="btn btn-ghost">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <span>Logout</span>
+            </button>
+        </nav>
+    </header>
+
+    <main class="container">
+        <div class="dashboard-header">
+            <h1>Product Reviews</h1>
+            <div class="subtitle">See what buyers are saying about your products</div>
+        </div>
+
+        <!-- Summary Section -->
+        <section class="section">
+            <div id="reviewSummary" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem;">
+                <div style="background: white; padding: 1.5rem; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); text-align: center;">
+                    <div style="font-size: 2.5rem; font-weight: 700; color: #28a745; margin-bottom: 0.5rem;" id="averageRating">0.0</div>
+                    <div style="color: #666; font-size: 0.9rem;">Average Rating</div>
+                    <div style="margin-top: 0.5rem;" id="ratingStars"></div>
+                </div>
+                <div style="background: white; padding: 1.5rem; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); text-align: center;">
+                    <div style="font-size: 2.5rem; font-weight: 700; color: #333; margin-bottom: 0.5rem;" id="totalReviews">0</div>
+                    <div style="color: #666; font-size: 0.9rem;">Total Reviews</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Reviews List -->
+        <section class="section">
+            <h3>All Reviews</h3>
+            <div id="reviewsContainer" style="min-height: 200px;">
+                <div style="text-align: center; padding: 2rem;">
+                    <i class="fa-solid fa-spinner fa-spin" style="font-size: 2rem; color: #28a745;"></i>
+                    <p style="margin-top: 1rem; color: #666;">Loading reviews...</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="script-php.js"></script>
+    <script src="help-assistant.js"></script>
+    <script src="farmer-reviews.js"></script>
+</body>
+
+</html>
+

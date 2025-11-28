@@ -1,0 +1,55 @@
+# PHP files and configs
+*.php
+config/
+api/
+vendor/
+PHPMailer/
+migrations/
+sql/
+edp/
+
+# Database
+*.sql
+*.db
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Logs
+*.log
+logs/
+
+# Documentation (optional - remove if you want to include)
+*.md
+!README.md
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Node modules (if using npm)
+node_modules/
+package-lock.json
+
+# Composer
+composer.lock
+composer.phar
+
+# Test files (optional - remove if you want to include)
+test_*.html
+test_*.php
+
+# Temporary files
+*.tmp
+*.temp
+cache/
+

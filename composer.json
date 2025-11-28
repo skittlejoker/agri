@@ -1,0 +1,17 @@
+{
+    "name": "agrimarket/email-verification",
+    "description": "AgriMarket Email Verification System",
+    "type": "project",
+    "require": {
+        "phpmailer/phpmailer": "^6.9"
+    },
+    "autoload": {
+        "psr-4": {
+            "AgriMarket\\": "src/"
+        }
+    }
+}
+
+
+
+

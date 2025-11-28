@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Registration Form - AgriMarket</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+
+<body data-page="register">
+    <main class="auth-container">
+        <section class="card">
+            <div class="card-header">
+                <i class="fa-solid fa-tractor"></i>
+                <h1>Test Registration Form</h1>
+                <p class="subtitle">Centered form with hidden terms</p>
+            </div>
+            <form id="registerForm" class="form">
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label for="fullName">Full Name</label>
+                        <input type="text" id="fullName" name="fullName" placeholder="John Doe" required>
+                        <small class="error" id="fullNameError"></small>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" placeholder="john@example.com" required>
+                        <small class="error" id="emailError"></small>
+                    </div>
+                </div>
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" id="username" name="username" placeholder="johndoe" required>
+                        <small class="error" id="usernameError"></small>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" placeholder="••••••••" required>
+                        <small class="error" id="passwordError"></small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="confirmPassword">Confirm Password</label>
+                    <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Re-enter password"
+                        required>
+                    <small class="error" id="confirmPasswordError"></small>
+                </div>
+                <div class="form-group">
+                    <label for="userType">User Type</label>
+                    <select id="userType" required>
+                        <option value="" selected disabled>Select user type</option>
+                        <option value="farmer">Farmer</option>
+                        <option value="buyer">Buyer</option>
+                    </select>
+                    <small class="error" id="userTypeError"></small>
+                </div>
+
+                <div class="form-row terms">
+                    <label class="checkbox">
+                        <input type="checkbox" id="acceptTerms">
+                        <span>I accept the <a href="#" id="openTerms" class="link">Terms and Conditions</a></span>
+                    </label>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Register</button>
+                <p class="switch">Already have an account? <a href="login.html" class="link">Login</a></p>
+            </form>
+        </section>
+
+        <div class="modal" id="termsModal" aria-hidden="true">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Terms and Conditions</h3>
+                    <button class="icon-btn" id="closeTerms" aria-label="Close Terms">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+                <div class="modal-body scrollable">
+                    <div id="termsContent" class="terms-content hidden">
+                        <p>Welcome to AgriMarket. By using this platform, you agree to the following terms:</p>
+                        <ul>
+                            <li><input type="checkbox" name="terms1"> Use the marketplace responsibly and ethically.
+                            </li>
+                            <li><input type="checkbox" name="terms2"> Respect other users and comply with local laws.
+                            </li>
+                            <li><input type="checkbox" name="terms3"> Do not post fraudulent or misleading information.
+                            </li>
+                            <li><input type="checkbox" name="terms4"> Only list genuine and safe agricultural products.
+                            </li>
+                        </ul>
+
+                        <p>By clicking "I Understand", you confirm that you have read, understood, and agreed to the
+                            Terms and Conditions stated above, and that you will use AgriMarket responsibly and in
+                            compliance with all applicable laws and regulations.</p>
+                    </div>
+
+                    <div id="termsPlaceholder" class="terms-placeholder">
+                        <div class="placeholder-content">
+                            <i class="fa-solid fa-file-contract"></i>
+                            <h4>Terms and Conditions</h4>
+                            <p>Click "View Terms" to read the full terms and conditions.</p>
+                            <button class="btn btn-primary" id="showTermsBtn">
+                                <i class="fa-solid fa-eye"></i>
+                                View Terms
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" id="agreeTermsBtn">
+                        <i class="fa-solid fa-check"></i>
+                        I Understand
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Terms and Conditions Modal Functionality
+        document.addEventListener('DOMContentLoaded', function () {
+            initializeTermsModal();
+        });
+
+        function initializeTermsModal() {
+            const openTermsBtn = document.getElementById('openTerms');
+            const termsModal = document.getElementById('termsModal');
+            const closeTermsBtn = document.getElementById('closeTerms');
+            const agreeTermsBtn = document.getElementById('agreeTermsBtn');
+            const acceptTermsCheckbox = document.getElementById('acceptTerms');
+            const showTermsBtn = document.getElementById('showTermsBtn');
+            const termsContent = document.getElementById('termsContent');
+            const termsPlaceholder = document.getElementById('termsPlaceholder');
+
+            // Open terms modal
+            if (openTermsBtn && termsModal) {
+                openTermsBtn.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    termsModal.classList.add('show');
+                    document.body.style.overflow = 'hidden';
+                });
+            }
+
+            // Show terms content when "View Terms" is clicked
+            if (showTermsBtn && termsContent && termsPlaceholder) {
+                showTermsBtn.addEventListener('click', function () {
+                    termsPlaceholder.style.display = 'none';
+                    termsContent.classList.remove('hidden');
+                });
+            }
+
+            // Close terms modal
+            if (closeTermsBtn && termsModal) {
+                closeTermsBtn.addEventListener('click', function () {
+                    termsModal.classList.remove('show');
+                    document.body.style.overflow = 'auto';
+                    // Reset to placeholder view
+                    resetTermsModal();
+                });
+            }
+
+            // Close modal when clicking outside
+            if (termsModal) {
+                termsModal.addEventListener('click', function (e) {
+                    if (e.target === termsModal) {
+                        termsModal.classList.remove('show');
+                        document.body.style.overflow = 'auto';
+                        // Reset to placeholder view
+                        resetTermsModal();
+                    }
+                });
+            }
+
+            // Handle "I Understand" button click
+            if (agreeTermsBtn && acceptTermsCheckbox) {
+                agreeTermsBtn.addEventListener('click', function () {
+                    // Check all checkboxes in the terms modal
+                    const termCheckboxes = termsModal.querySelectorAll('input[type="checkbox"]');
+                    termCheckboxes.forEach(checkbox => {
+                        checkbox.checked = true;
+                    });
+
+                    // Check the main accept terms checkbox
+                    acceptTermsCheckbox.checked = true;
+
+                    // Close the modal
+                    termsModal.classList.remove('show');
+                    document.body.style.overflow = 'auto';
+
+                    // Show success message
+                    showTermsSuccessMessage();
+
+                    // Reset to placeholder view
+                    resetTermsModal();
+                });
+            }
+
+            // Function to reset modal to placeholder view
+            function resetTermsModal() {
+                if (termsContent && termsPlaceholder) {
+                    termsContent.classList.add('hidden');
+                    termsPlaceholder.style.display = 'flex';
+                }
+            }
+        }
+
+        function showTermsSuccessMessage() {
+            // Create a temporary success message
+            const successMessage = document.createElement('div');
+            successMessage.className = 'terms-success-message';
+            successMessage.innerHTML = `
+                <div style="
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    background: #d4edda;
+                    color: #155724;
+                    padding: 1rem 1.5rem;
+                    border-radius: 8px;
+                    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+                    z-index: 10000;
+                    border: 1px solid #c3e6cb;
+                    font-weight: 500;
+                    animation: slideInRight 0.3s ease-out;
+                ">
+                    <i class="fa-solid fa-check-circle" style="margin-right: 0.5rem; color: #28a745;"></i>
+                    All terms and conditions accepted!
+                </div>
+            `;
+
+            document.body.appendChild(successMessage);
+
+            // Remove message after 3 seconds
+            setTimeout(() => {
+                successMessage.remove();
+            }, 3000);
+        }
+    </script>
+</body>
+
+</html>
+
+
+

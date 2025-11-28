@@ -1,0 +1,108 @@
+================================================================================
+OTP AUTHENTICATION SYSTEM - QUICK FILE REFERENCE
+================================================================================
+
+All files are located in: agriculture-marketplace/
+
+================================================================================
+CONFIGURATION FILES (config/)
+================================================================================
+✅ config/email_config.php
+   - Gmail SMTP settings
+   - ACTION: Update with Gmail App Password
+
+✅ config/phpmailer_helper.php
+   - Email sending functions
+   - sendOTPEmail() - For password reset OTP
+   - sendVerificationEmail() - For account verification
+
+✅ config/database.php
+   - Database connection
+   - Helper functions (sendResponse, hashPassword, etc.)
+
+================================================================================
+OTP API ENDPOINTS (api/)
+================================================================================
+✅ api/send_otp_code.php
+   - Generates 6-digit OTP
+   - Sends OTP via email
+   - Stores OTP in database (10 min expiry)
+
+✅ api/verify_otp.php
+   - Verifies OTP code
+   - Generates reset token
+   - Marks OTP as used
+
+✅ api/reset_password.php
+   - Resets password using token
+   - Validates token
+   - Updates password securely
+
+================================================================================
+ACCOUNT VERIFICATION (api/)
+================================================================================
+✅ api/register.php
+   - User registration
+   - Sends verification email
+
+✅ api/verify.php
+   - Verifies email with code
+   - Marks account as verified
+
+✅ api/resend_verification_code.php
+   - Resends verification code
+   - Generates new code
+
+✅ api/login.php
+   - User login
+   - Checks email verification status
+
+================================================================================
+REQUIRED DEPENDENCIES
+================================================================================
+📦 PHPMailer Library
+   Location: vendor/phpmailer/phpmailer/
+   Install: composer require phpmailer/phpmailer
+
+================================================================================
+DATABASE TABLES (Auto-created)
+================================================================================
+✅ password_reset_otp
+   - Created by: send_otp_code.php
+   - Stores OTP codes
+
+✅ password_reset_tokens
+   - Created by: verify_otp.php
+   - Stores reset tokens
+
+✅ users table (needs columns):
+   - verification_code VARCHAR(6)
+   - is_verified TINYINT(1)
+
+================================================================================
+SETUP STEPS
+================================================================================
+1. Install PHPMailer:
+   composer install
+
+2. Configure Email:
+   - Get Gmail App Password: https://myaccount.google.com/apppasswords
+   - Update config/email_config.php
+
+3. Test:
+   - Register new user
+   - Check email for verification code
+   - Test password reset flow
+
+================================================================================
+ALL FILES ARE READY! ✅
+================================================================================
+Just update email_config.php with your Gmail App Password!
+
+
+
+
+
+
+
+

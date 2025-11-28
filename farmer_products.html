@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Products - Farmer Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+
+<body data-page="farmer-products">
+    <header class="site-header">
+        <div class="brand">
+            <i class="fa-solid fa-wheat-awn"></i>
+            <span>AgriMarket</span>
+        </div>
+        <nav class="nav">
+            <a href="farmer_dashboard.html" class="nav-link">Dashboard</a>
+            <a href="farmer_products.html" class="nav-link active">My Products</a>
+            <a href="farmer_orders.html" class="nav-link">Orders</a>
+            <a href="farmer_reviews.html" class="nav-link">Reviews</a>
+            <a href="#" class="nav-link" id="changePasswordLink">Change Password</a>
+            <button id="helpBtn" class="btn btn-ghost" onclick="showHelpModal(); return false;"
+                title="Get Help (Press F1)">
+                <i class="fa-solid fa-circle-question"></i>
+                <span>Help</span>
+            </button>
+            <button id="logoutBtn" class="btn btn-ghost">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <span>Logout</span>
+            </button>
+        </nav>
+    </header>
+
+    <main class="container">
+        <div class="dashboard-header">
+            <h1>My Products</h1>
+            <div class="subtitle">Manage your agricultural products</div>
+        </div>
+
+        <!-- Add Product Form -->
+        <section class="section">
+            <h3>Add New Product</h3>
+            <div class="form-container">
+                <form id="addProductForm" class="product-form" novalidate>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="prodName">Product Name *</label>
+                            <input type="text" id="prodName" name="product_name" placeholder="e.g., Organic Tomatoes"
+                                required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="prodPriceGram">Price per Gram (₱/g)</label>
+                            <div style="position: relative; display: flex; align-items: center;">
+                                <input type="number" id="prodPriceGram" name="product_price_gram" step="0.01" min="0"
+                                    placeholder="0.00" style="padding-right: 2.5rem;">
+                                <span
+                                    style="position: absolute; right: 0.75rem; color: #666; font-weight: 500; pointer-events: none;">g</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="prodPriceKg">Price per Kilogram (₱/kg) *</label>
+                            <div style="position: relative; display: flex; align-items: center;">
+                                <input type="number" id="prodPriceKg" name="product_price_kg" step="0.01" min="0.01"
+                                    placeholder="0.00" required style="padding-right: 3rem;">
+                                <span
+                                    style="position: absolute; right: 0.75rem; color: #666; font-weight: 500; pointer-events: none;">kg</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="prodStock">Stock Quantity</label>
+                            <input type="number" id="prodStock" name="product_stock" min="0" value="0" placeholder="0">
+                        </div>
+                        <div class="form-group">
+                            <label for="prodImage">Image URL (Optional)</label>
+                            <input type="url" id="prodImage" name="product_image"
+                                placeholder="https://example.com/image.jpg">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="prodDesc">Description</label>
+                        <textarea id="prodDesc" name="product_description" rows="4"
+                            placeholder="Describe your product..."></textarea>
+                    </div>
+                    <div class="form-group" style="display: flex; gap: 1rem; align-items: center;">
+                        <button type="button" class="btn btn-primary btn-large" id="addProductBtn"
+                            style="cursor: pointer; pointer-events: auto; opacity: 1; border: none; min-width: 150px; z-index: 10; position: relative;"
+                            onclick="handleAddProductClick(event); return false;">
+                            <i class="fa-solid fa-plus"></i>
+                            <span>Add Product</span>
+                        </button>
+                        <button type="button" class="btn btn-secondary btn-large" id="cancelEditBtn"
+                            style="cursor: pointer; display: none; border: none; min-width: 150px;"
+                            onclick="handleCancelEdit(); return false;">
+                            <i class="fa-solid fa-times"></i>
+                            <span>Cancel Edit</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <!-- Products List -->
+        <section class="section">
+            <h3>Your Products</h3>
+            <div id="farmerProducts" class="products">
+                <!-- Products will be loaded here by JavaScript -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Change Password Modal -->
+    <div class="modal" id="changePasswordModal" aria-hidden="true">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Change Password</h3>
+                <button class="icon-btn" id="closePasswordModal" aria-label="Close">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="changePasswordForm">
+                    <div class="form-group password-field">
+                        <label for="oldPassword">Current Password</label>
+                        <input type="password" id="oldPassword" placeholder="Enter your current password" required>
+                        <button type="button" class="password-toggle-btn" data-target="oldPassword"
+                            aria-label="Toggle password visibility">
+                            <i class="fa-solid fa-eye"></i>
+                        </button>
+                        <small class="error" id="oldPasswordError"></small>
+                    </div>
+                    <div class="form-group password-field">
+                        <label for="newPassword">New Password</label>
+                        <input type="password" id="newPassword" placeholder="Enter new password" required>
+                        <button type="button" class="password-toggle-btn" data-target="newPassword"
+                            aria-label="Toggle password visibility">
+                            <i class="fa-solid fa-eye"></i>
+                        </button>
+                        <small class="error" id="newPasswordError"></small>
+                    </div>
+                    <div class="form-group password-field">
+                        <label for="confirmNewPassword">Confirm New Password</label>
+                        <input type="password" id="confirmNewPassword" placeholder="Re-enter new password" required>
+                        <button type="button" class="password-toggle-btn" data-target="confirmNewPassword"
+                            aria-label="Toggle password visibility">
+                            <i class="fa-solid fa-eye"></i>
+                        </button>
+                        <small class="error" id="confirmNewPasswordError"></small>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" id="cancelPasswordBtn">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Change Password</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Define the function immediately before the page loads to ensure it's available
+        function handleAddProductClick(e) {
+            if (e) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+
+            console.log('=== Add Product Button Clicked ===');
+
+            // Get form elements
+            const form = document.getElementById('addProductForm');
+            const prodName = document.getElementById('prodName');
+            const prodPriceGram = document.getElementById('prodPriceGram');
+            const prodPriceKg = document.getElementById('prodPriceKg');
+            const prodStock = document.getElementById('prodStock');
+            const prodDesc = document.getElementById('prodDesc');
+            const prodImage = document.getElementById('prodImage');
+            const submitBtn = document.getElementById('addProductBtn');
+
+            if (!form || !prodName || !prodPriceKg) {
+                alert('Form error: Required fields not found. Please refresh the page.');
+                return false;
+            }
+
+            // Validate required fields
+            if (!prodName.value.trim() || prodName.value.trim().length < 2) {
+                alert('Product name must be at least 2 characters');
+                prodName.focus();
+                return false;
+            }
+
+            if (!prodPriceKg.value || parseFloat(prodPriceKg.value) <= 0) {
+                alert('Price per kilogram must be greater than 0');
+                prodPriceKg.focus();
+                return false;
+            }
+
+            // Get form values
+            const productName = prodName.value.trim();
+            const productPriceGram = prodPriceGram && prodPriceGram.value && parseFloat(prodPriceGram.value) > 0
+                ? parseFloat(prodPriceGram.value)
+                : null;
+            const productPriceKg = parseFloat(prodPriceKg.value);
+            const productDesc = prodDesc ? prodDesc.value.trim() : '';
+            const productStock = prodStock ? parseInt(prodStock.value) || 0 : 0;
+            const productImage = prodImage ? prodImage.value.trim() : '';
+
+            // Check if in edit mode
+            const isEditMode = form.dataset.editMode === 'true';
+            const productId = form.dataset.productId ? parseInt(form.dataset.productId) : null;
+
+            console.log('Submitting product:', { productName, productPriceGram, productPriceKg, productStock, isEditMode, productId });
+
+            // Prepare form data
+            const formData = new FormData();
+            formData.append('product_name', productName);
+            if (productPriceGram !== null) {
+                formData.append('product_price_gram', productPriceGram);
+            }
+            formData.append('product_price_kg', productPriceKg);
+            formData.append('product_description', productDesc);
+            formData.append('product_stock', productStock);
+
+            if (productImage) {
+                formData.append('product_image', productImage);
+            }
+
+            if (isEditMode && productId) {
+                formData.append('product_id', productId);
+            }
+
+            // Show loading state
+            if (submitBtn) {
+                const originalHTML = submitBtn.innerHTML;
+                submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> <span>' + (isEditMode ? 'Updating...' : 'Adding...') + '</span>';
+                submitBtn.disabled = true;
+                submitBtn.style.cursor = 'not-allowed';
+                submitBtn.style.opacity = '0.7';
+            }
+
+            // Determine API endpoint
+            const apiUrl = isEditMode ? 'api/update_product.php' : 'api/add_product.php';
+
+            console.log('Sending request to:', apiUrl);
+
+            // Send to PHP backend
+            fetch(apiUrl, {
+                method: 'POST',
+                body: formData,
+                credentials: 'same-origin'
+            })
+                .then(response => {
+                    console.log('Response status:', response.status);
+                    if (!response.ok) {
+                        return response.text().then(text => {
+                            console.error('Error response:', text);
+                            throw new Error('Server error: ' + response.status);
+                        });
+                    }
+                    return response.text().then(text => {
+                        console.log('Response text:', text);
+                        try {
+                            return JSON.parse(text);
+                        } catch (e) {
+                            console.error('JSON parse error:', e, 'Response:', text);
+                            throw new Error('Invalid server response');
+                        }
+                    });
+                })
+                .then(data => {
+                    console.log('Response data:', data);
+
+                    if (data && data.success === true) {
+                        alert('Product added successfully!');
+
+                        // Reset form
+                        form.reset();
+                        delete form.dataset.editMode;
+                        delete form.dataset.productId;
+
+                        // Reset button
+                        if (submitBtn) {
+                            submitBtn.innerHTML = '<i class="fa-solid fa-plus"></i> <span>Add Product</span>';
+                            submitBtn.disabled = false;
+                            submitBtn.style.cursor = 'pointer';
+                            submitBtn.style.opacity = '1';
+                        }
+
+                        // Hide cancel button
+                        const cancelBtn = document.getElementById('cancelEditBtn');
+                        if (cancelBtn) {
+                            cancelBtn.style.display = 'none';
+                        }
+
+                        // Clear image preview
+                        const previewContainer = document.getElementById('imagePreviewContainer');
+                        if (previewContainer) {
+                            previewContainer.innerHTML = '';
+                        }
+
+                        // Reload products list
+                        if (typeof loadProducts === 'function') {
+                            setTimeout(function () {
+                                loadProducts();
+                            }, 500);
+                        } else {
+                            // Fallback: reload page
+                            setTimeout(function () {
+                                window.location.reload();
+                            }, 1000);
+                        }
+                    } else {
+                        const errorMsg = data && data.message ? data.message : 'Failed to add product';
+                        alert('Error: ' + errorMsg);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Error: ' + (error.message || 'Network error. Please try again.'));
+                })
+                .finally(() => {
+                    // Reset button state
+                    if (submitBtn) {
+                        submitBtn.disabled = false;
+                        submitBtn.style.cursor = 'pointer';
+                        submitBtn.style.opacity = '1';
+                        if (submitBtn.innerHTML.includes('spinner') || submitBtn.innerHTML.includes('Adding') || submitBtn.innerHTML.includes('Updating')) {
+                            submitBtn.innerHTML = '<i class="fa-solid fa-plus"></i> <span>Add Product</span>';
+                        }
+                    }
+                });
+
+            return false;
+        }
+
+        // Make it globally available
+        window.handleAddProductClick = handleAddProductClick;
+
+        // Test function availability
+        console.log('handleAddProductClick function defined:', typeof handleAddProductClick);
+    </script>
+    <script src="script-php.js"></script>
+    <script src="help-assistant.js"></script>
+    <script src="farmer-products.js?v=2"></script>
+    <style>
+        .quick-action-card:hover {
+            transform: translateY(-4px) !important;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+        }
+
+        /* Enhanced product card styles */
+        #farmerProducts .product-card {
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        #farmerProducts .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+        }
+
+        /* Stock status colors */
+        .stock.in-stock {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .stock.low-stock {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+
+        .stock.out-of-stock {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        /* Form enhancements */
+        .product-form input:focus,
+        .product-form textarea:focus {
+            outline: none;
+            border-color: var(--primary-green, #28a745);
+            box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.1);
+        }
+
+        .product-form input:invalid:not(:placeholder-shown) {
+            border-color: #dc3545;
+        }
+
+        .product-form input:valid:not(:placeholder-shown) {
+            border-color: #28a745;
+        }
+
+        /* Button styles */
+        #addProductBtn {
+            min-width: 150px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        #addProductBtn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed !important;
+            pointer-events: none !important;
+        }
+
+        #addProductBtn:not(:disabled):hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+        }
+
+        #cancelEditBtn {
+            display: none;
+            min-width: 150px;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        #cancelEditBtn.show {
+            display: inline-flex !important;
+        }
+
+        #cancelEditBtn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(108, 117, 125, 0.3);
+        }
+
+        /* Loading state */
+        .product-card[data-loading="true"] {
+            opacity: 0.6;
+            pointer-events: none;
+        }
+
+        /* Image preview container */
+        #imagePreviewContainer {
+            margin-top: 1rem;
+        }
+
+        #imagePreviewContainer img {
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</body>
+
+</html>
